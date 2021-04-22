@@ -1,0 +1,52 @@
+
+/*Navigation style:*/
+nav{
+    width: 100%;
+    background-color: rgba(9, 111, 24, 1);
+    background-repeat: repeat;
+    font-family: "Times New Roman", Times, serif;
+    border-bottom: 2px solid rgb(0, 25, 39);
+
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+nav::after{
+  clear: both;
+}
+.navul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+  
+  .navli {
+    float: left;
+  }
+  
+  .nava {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+  }
+  
+  .nava:hover {
+    background-color: rgba(102, 41, 201, 0.5);
+  }
+/*Class:*/
+.active{
+    background-color: rgba(83, 31, 167, 0.5);
+}
+.logo-div:hover {
+    background-color: rgba(0, 0, 0, 0);
+    opacity: 0.8;
+}
+.logo-div {
+    padding: 0px;
+    margin-right: 1px;
+    margin-left: 1px;
+}
