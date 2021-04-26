@@ -1,6 +1,9 @@
 * {
     block-size: border-box;
 }
+body{
+    background-color: rgb(47, 47, 47);
+}
 #video {
     position: fixed;
     right: 0;
