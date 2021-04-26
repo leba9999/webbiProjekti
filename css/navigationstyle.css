@@ -5,11 +5,16 @@ nav{
     background-color: rgba(9, 111, 24, 1);
     background-repeat: repeat;
     font-family: "Times New Roman", Times, serif;
-    border-bottom: 2px solid rgb(0, 25, 39);
-
+    border-bottom: 2px solid rgb(0, 39, 1);
+    text-align: center;
     position: sticky;
+    padding-top: 4px;
+    box-shadow: inset 0px 0px 10px rgb(47, 47, 47);
     top: 0;
     z-index: 2;
+}
+body{
+    margin: 0px;
 }
 nav::after{
   clear: both;
@@ -19,27 +24,48 @@ nav::after{
     margin: 0;
     padding: 0;
     overflow: hidden;
+    display: inline-block;
   }
-  
+
   .navli {
-    float: left;
+      display: inline-block;
+      position: relative;
   }
-  
+
   .nava {
-    display: block;
+      display: inline-block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     border-radius: 5px;
+      box-shadow: inset 0px 0px 10px rgb(47, 47, 47);
   }
-  
-  .nava:hover {
-    background-color: rgba(102, 41, 201, 0.5);
-  }
+.contentBlock{
+    display: inline-block;
+}
+.nava:hover {
+    background-color: rgba(6, 255, 0, 0.5);
+}
+.navli::before {
+    content: '';
+    display: block;
+    height: 3.5px;
+    background-color: rgba(255, 221, 0, 0.32);
+
+    position: absolute;
+    bottom: 3px;
+    width: 0%;
+
+    transition: all ease-in-out 500ms;
+}
+.navli:hover::before {
+    width: 100%;
+    background-color: rgba(134, 117, 0, 0.32);
+}
 /*Class:*/
 .active{
-    background-color: rgba(83, 31, 167, 0.5);
+    background-color: rgba(6, 255, 0, 0.5);
 }
 .logo-div:hover {
     background-color: rgba(0, 0, 0, 0);
