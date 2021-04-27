@@ -1,12 +1,12 @@
 'use strict';
-
 // Asetukset paikkatiedon hakua varten (valinnainen)
 const options = {
     enableHighAccuracy: true,
     timeout: 5000,
     maximumAge: 0
 };
-
+const lat = 60.181576782061356;
+const lng = 24.939455637162748;
 let latitude = 61.951180799999996;
 let longitude = 28.2066944;
 let accuracyDistance = 10;
@@ -31,14 +31,14 @@ function showID(json){
     }
     addMarkers(json);
 }
-
+// Paikannetaan laite. Ei ole välttämätön mutta kartalle saadaan merkki!
 function geoFindMe() {
-
     function success(position) {
         latitude  = position.coords.latitude;
         longitude = position.coords.longitude;
         accuracyDistance = position.coords.accuracy;
-        console.log(`Latitude: ${latitude} °, Longitude: ${longitude} °`);
+        // Tulostetaan paikkatiedot konsoliin
+        console.log(`Latitude: ${latitude} °, Longitude: ${longitude} ° \nMore or less ${accuracyDistance} meters.`);
     }
     function error() {
         console.error('Unable to retrieve your location');
@@ -50,26 +50,61 @@ function geoFindMe() {
     }
 
 }
-// Funktio, joka ajetaan, kun paikkatiedot on haettu
+// Lisätään merkit kartalle json datan avulla.
 function addMarkers(json) {
 
-    // Tulostetaan paikkatiedot konsoliin
-    console.log('Your current position is:');
-    console.log(`Latitude : ${latitude}`);
-    console.log(`Longitude: ${longitude}`);
-    console.log(`More or less ${accuracyDistance} meters.`);
-
     // Käytetään leaflet.js -kirjastoa näyttämään sijainti kartalla (https://leafletjs.com/)
-    const map = L.map('map').setView([latitude, longitude], 13);
+    // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
+    const map = L.map('map').setView([lat, lng], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
+
     for (let i = 0; i < json.length; i++){
-    L.marker([json[i].points[0].locationPoint.lat, json[i].points[0].locationPoint.lng]).addTo(map)
-        .bindPopup(json[i].points[0].locationPoint.pointInfo)
-        .openPopup();
+        for (let j = 0; j < json[i].points.length; j++){
+            if (json[i].points[j].locationPoint.lat != null || json[i].points[j].locationPoint.lng != null ){
+                L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint.pointInfo)}).addTo(map)
+                    .bindPopup(json[i].points[j].locationPoint.pointInfo)
+                    .openPopup();
+            }
+        }
     }
-    L.marker([latitude, longitude]).addTo(map)
+    for (let s = 0; s < sana.length; s++){
+        sana[s] = sana[s].toLowerCase();
+    }
+    L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
         .bindPopup('Olet tässä')
         .openPopup();
+}
+function pickMarker(words){
+    //TODO: Jos joku keksisi paremman idean miten asetetaan merkit niin siitä vaan! :D
+    const dictionary = {
+        "merkki" : point,
+        "kahvila" : cafeteria,
+        "kioskikahvila" : cafeteria,
+        "ravintola" : restaurant,
+        "grill": restaurant,
+        "uimaranta" : beach,
+        "metro" : metro,
+        "metroasema" : metro,
+        "koira" : dogpark,
+        "koirapuisto": dogpark,
+        "wc": wc_1,
+        "vessa": wc_1,
+        "käymälä": wc_2,
+        "ulkovessa": wc_2,
+        "pysäköintipaikka": parking,
+        "pysäköintialue": parking,
+        "parkkialue": parking,
+        "piknikpaikka": picnic
+    };
+    let word = words.split(/[\s,<>-]+/);
+    for (let s = 0; s < word.length; s++){
+        word[s] = word[s].toLowerCase();
+        if (dictionary.hasOwnProperty(word[s])){
+            console.log(word[s]);
+            return dictionary[word[s]];
+        }
+    }
+    return dictionary["merkki"];
 }

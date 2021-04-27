@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const nav = document.querySelector("nav");
 const body = document.querySelector("body");
