@@ -69,9 +69,6 @@ function addMarkers(json) {
             }
         }
     }
-    for (let s = 0; s < sana.length; s++){
-        sana[s] = sana[s].toLowerCase();
-    }
     L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
         .bindPopup('Olet tässä')
         .openPopup();
@@ -80,6 +77,16 @@ function pickMarker(words){
     //TODO: Jos joku keksisi paremman idean miten asetetaan merkit niin siitä vaan! :D
     const dictionary = {
         "merkki" : point,
+        "opastus": infoPoint,
+        "kartta": infoPoint,
+        "opastaulu": infoPoint,
+        "info": infoPoint,
+        "museo":attraction,
+        "nähtävyys":attraction,
+        "lintupiilo":birdhide,
+        "ulkoilumaja":shelter,
+        "maja":shelter,
+        "esteetön":unobstructed,
         "kahvila" : cafeteria,
         "kioskikahvila" : cafeteria,
         "ravintola" : restaurant,
@@ -89,6 +96,8 @@ function pickMarker(words){
         "metroasema" : metro,
         "koira" : dogpark,
         "koirapuisto": dogpark,
+        "hiihtoladut":skiTrack,
+        "hiihtolatu":skiTrack,
         "wc": wc_1,
         "vessa": wc_1,
         "käymälä": wc_2,
@@ -96,13 +105,18 @@ function pickMarker(words){
         "pysäköintipaikka": parking,
         "pysäköintialue": parking,
         "parkkialue": parking,
-        "piknikpaikka": picnic
+        "piknikpaikka": picnic,
+        "leikkipaikka": playArea,
+        "grillialue":firePlace,
+        "nuotio":firePlace,
+        "grilli":firePlace,
     };
-    let word = words.split(/[\s,<>-]+/);
+    let worde = words.split(/[\skahvila]+/).pop();
+    console.log(worde);
+    let word = words.split(/[\s,.<>-]+/);
     for (let s = 0; s < word.length; s++){
         word[s] = word[s].toLowerCase();
         if (dictionary.hasOwnProperty(word[s])){
-            console.log(word[s]);
             return dictionary[word[s]];
         }
     }
