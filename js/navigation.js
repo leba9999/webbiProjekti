@@ -10,7 +10,7 @@ console.log(`navigation.js: ${filename}`);
 let files = ["etusivu.html", "kartta.html", "tietoa.html"];
 let activefile = ["", "", "", ""];
 for(let i = 0; i < files.length; i++){
-    if(filename == files[i]){
+    if(filename === files[i]){
         activefile[i] = "active";
     }
 }
