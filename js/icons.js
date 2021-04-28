@@ -2,7 +2,7 @@
 const scale = 0.7;
 let markerIcon = L.Icon.extend({
     options: {
-        shadowUrl: 'img/svg/merkki_varjo.svg',
+        shadowUrl: 'img/svg/points/merkki_varjo.svg',
         iconSize:     [50 * scale, 50 * scale],
         shadowSize:   [50 * scale, 50 * scale],
         iconAnchor:   [25 * scale, 46 * scale],
@@ -17,9 +17,9 @@ let signIcon = L.Icon.extend({
         popupAnchor:  [0, -45 * scale]
     }
 });
-let pointHere = new markerIcon({iconUrl: 'img/svg/punainen_merkki.svg'});
-let point = new markerIcon({iconUrl: 'img/svg/vihrea_merkki.svg'});
-let routeMarker = new markerIcon({iconUrl: 'img/svg/vihrea_merkki.svg'});
+let pointHere = new markerIcon({iconUrl: 'img/svg/points/punainen_merkki.svg'});
+let point = new markerIcon({iconUrl: 'img/svg/points/vihrea_merkki.svg'});
+let routeMarker = new markerIcon({iconUrl: 'img/svg/points/vihrea_merkki.svg'});
 
 let infoPoint = new signIcon({iconUrl: 'img/svg/info.svg'});
 let attraction = new signIcon({iconUrl: 'img/svg/nahtavyys.svg'});

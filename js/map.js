@@ -81,13 +81,15 @@ function addMarkers(json) {
     L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
         .bindPopup(`Olet tässä noin ${accuracyDistance}m tarkuus alueella`)
         .openPopup()
-    let myStyle = {
-        "color": "#3B6D2E",
-        "weight": 5,
-        "opacity": 0.65
-    };
     for (let i = 0; i < fileName.length; i++){
-        let geojsonLayer = new L.GeoJSON.AJAX(`json/${fileName[i]}.geojson`, {style : myStyle});
+        let geojsonLayer = new L.GeoJSON.AJAX(`json/${fileName[i]}.geojson`, {
+            style: function(feature) {
+                return {
+                    color: feature.properties['stroke'],
+                    width: feature.properties['stroke-width'],
+                    opacity: 0.65
+                };
+            }});
         geojsonLayer.addTo(map);
     }
 }
