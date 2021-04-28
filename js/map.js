@@ -27,7 +27,7 @@ function searchIDatAPI(apiurl)  {
     fetch(apiurl).then(function(response) {
         return response.json();
     }).then(function(json) {
-        showID(json);
+        addMarkers(json);
     });
 }
 
@@ -57,9 +57,12 @@ function geoFindMe() {
 }
 // Lisätään merkit kartalle json datan avulla.
 function addMarkers(json) {
+
     // Käytetään leaflet.js -kirjastoa näyttämään sijainti kartalla (https://leafletjs.com/)
     // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
-    const map = L.map('map').setView([lat, lng], 13);
+    const map = L.map('map',{
+        worldCopyJump: true,
+    }).setView([lat, lng], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
@@ -72,9 +75,8 @@ function addMarkers(json) {
                     closeOnClick: false,
                     keepInView: true
                 }).setContent(json[i].points[j].locationPoint.pointInfo);
-                L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint.pointInfo)}).addTo(map)
-                    .bindPopup(myPopup)
-                    .openPopup();
+                L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)}).addTo(map)
+                    .bindPopup(myPopup);
             }
         }
     }
@@ -93,7 +95,18 @@ function addMarkers(json) {
         geojsonLayer.addTo(map);
     }
 }
-function pickMarker(words){
+function pickMarker(locationPoint){
+    let words = locationPoint.pointInfo;
+    let coordinates = locationPoint;
+    // Erikois tapauksia varten voidaan asettaa tietylle koordinaatille oma merkki
+    const specialLat = [60.13294372479865, 60.14060185620884, 60.14029722346168];
+    const specialLng = [25.000413595300188, 24.916573762893676, 24.917185306549072];
+    const specialMarker = [warning, septitankki, venevalkama];
+    for (let i = 0; i < specialLng.length; i++){
+        if (specialLat[i] == coordinates.lat && specialLng[i] == coordinates.lng){
+            return specialMarker[i];
+        }
+    }
     //TODO: Jos joku keksisi paremman idean miten asetetaan merkit niin siitä vaan! :D
     const dictionary = {
         "merkki" : attraction,

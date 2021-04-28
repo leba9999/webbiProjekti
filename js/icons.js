@@ -46,6 +46,8 @@ let horses  = new signIcon({iconUrl: 'img/svg/ratsastaja.svg'});
 let water  = new signIcon({iconUrl: 'img/svg/juomavesi.svg'});
 let wc_1 = new signIcon({iconUrl: 'img/svg/WC.svg'});
 let wc_2 = new signIcon({iconUrl: 'img/svg/kaymala.svg'});
+let septitankki = new signIcon({iconUrl: 'img/svg/septitankin_tyhjennys.svg'});
+let venevalkama = new signIcon({iconUrl: 'img/svg/venevalkama.svg'});
 
 let ferry  = new signIcon({iconUrl: 'img/svg/lauttayhteys.svg'});
 let parking = new signIcon({iconUrl: 'img/svg/p_paikka.svg'});
