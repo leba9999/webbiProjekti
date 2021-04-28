@@ -54,11 +54,9 @@ function geoFindMe() {
     } else {
         navigator.geolocation.getCurrentPosition(success, error, options);
     }
-
 }
 // Lisätään merkit kartalle json datan avulla.
 function addMarkers(json) {
-
     // Käytetään leaflet.js -kirjastoa näyttämään sijainti kartalla (https://leafletjs.com/)
     // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
     const map = L.map('map').setView([lat, lng], 13);
@@ -69,8 +67,13 @@ function addMarkers(json) {
     for (let i = 0; i < json.length; i++){
         for (let j = 0; j < json[i].points.length; j++){
             if (json[i].points[j].locationPoint.lat != null || json[i].points[j].locationPoint.lng != null ){
+                let myPopup = L.popup({
+                    maxHeight: 500,
+                    closeOnClick: false,
+                    keepInView: true
+                }).setContent(json[i].points[j].locationPoint.pointInfo);
                 L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint.pointInfo)}).addTo(map)
-                    .bindPopup(json[i].points[j].locationPoint.pointInfo)
+                    .bindPopup(myPopup)
                     .openPopup();
             }
         }
@@ -83,11 +86,6 @@ function addMarkers(json) {
         "weight": 5,
         "opacity": 0.65
     };
-    /*
-    L.geoJSON(myLines, {
-        style: myStyle
-    }).addTo(map);
-    */
     for (let i = 0; i < fileName.length; i++){
         let geojsonLayer = new L.GeoJSON.AJAX(`json/${fileName[i]}.geojson`, {style : myStyle});
         geojsonLayer.addTo(map);
@@ -156,7 +154,7 @@ function pickMarker(words){
         "grilli":firePlace,
     };
     let word = words.split(/[\s,.<(>)-]+/);
-    if (word.length >= 13){
+    if (word.length >= 25){
         return routeMarker;
     }
     for (let s = 0; s < word.length; s++){
