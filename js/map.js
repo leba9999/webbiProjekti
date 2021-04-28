@@ -7,9 +7,9 @@ const options = {
 };
 const lat = 60.181576782061356;
 const lng = 24.939455637162748;
-let latitude = 61.951180799999996;
-let longitude = 28.2066944;
-let accuracyDistance = 10;
+let latitude;
+let longitude;
+let accuracyDistance;
 
 geoFindMe();
 
@@ -70,7 +70,7 @@ function addMarkers(json) {
         }
     }
     L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
-        .bindPopup('Olet tässä')
+        .bindPopup(`Olet tässä noin ${accuracyDistance}m tarkuus alueella`)
         .openPopup();
 }
 function pickMarker(words){
@@ -81,39 +81,58 @@ function pickMarker(words){
         "kartta": infoPoint,
         "opastaulu": infoPoint,
         "info": infoPoint,
+        "oleskelurajoitusalue":warning,
         "museo":attraction,
         "nähtävyys":attraction,
         "lintupiilo":birdhide,
+        "lintutorni" : birdtower,
         "ulkoilumaja":shelter,
         "maja":shelter,
         "esteetön":unobstructed,
         "kahvila" : cafeteria,
         "kioskikahvila" : cafeteria,
+        "jäätelökahvila" : cafeteria,
+        "kioski" : cafeteria,
         "ravintola" : restaurant,
         "grill": restaurant,
         "uimaranta" : beach,
+        "uimapaikka" : beach,
+        "uintipaikka" : beach,
+        "uimalaitos" : beach,
+        "naturistiuimaranta" : beach,
+        "maauimala" : beach,
+        "lauttayhteys":ferry,
+        "yhteysvenelaituri":ferry,
+        "vesibussiliikenne":ferry,
         "metro" : metro,
         "metroasema" : metro,
         "koira" : dogpark,
         "koirapuisto": dogpark,
         "hiihtoladut":skiTrack,
         "hiihtolatu":skiTrack,
+        "vesipiste":water,
         "wc": wc_1,
         "vessa": wc_1,
         "käymälä": wc_2,
         "ulkovessa": wc_2,
+        "sauna" : sauna,
+        "suihku": shower,
+        "pukukoppi":changingRoom,
+        "pukuhuone":changingRoom,
+        "ratsastuskenttä":horses,
+        "ratsastushalli":horses,
         "pysäköintipaikka": parking,
         "pysäköintialue": parking,
         "parkkialue": parking,
         "piknikpaikka": picnic,
+        "piknik": picnic,
         "leikkipaikka": playArea,
         "grillialue":firePlace,
+        "grillikatos":firePlace,
         "nuotio":firePlace,
         "grilli":firePlace,
     };
-    let worde = words.split(/[\skahvila]+/).pop();
-    console.log(worde);
-    let word = words.split(/[\s,.<>-]+/);
+    let word = words.split(/[\s,.<(>)-]+/);
     for (let s = 0; s < word.length; s++){
         word[s] = word[s].toLowerCase();
         if (dictionary.hasOwnProperty(word[s])){
