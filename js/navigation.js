@@ -1,6 +1,6 @@
 'use strict';
 
-const body = document.querySelector('body');
+const header = document.querySelector('header');
 const nav = document.createElement('nav');
 const ul = document.createElement('ul');
 
@@ -11,7 +11,7 @@ console.log(`navigation.js: ${filename}`);
 let siteTopic = ['Etusivu', 'Kartta', 'Tietoa'];
 let files = ["etusivu.html", "kartta.html", "tietoa.html"];
 
-body.appendChild(nav);
+header.appendChild(nav);
 nav.appendChild(ul);
 ul.classList.add('navul');
 
