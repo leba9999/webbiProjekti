@@ -15,6 +15,7 @@ const lng = 24.939455637162748;
 let latitude;
 let longitude;
 let accuracyDistance;
+let map;
 
 geoFindMe();
 
@@ -22,9 +23,12 @@ let apiurl = `https://citynature.eu/api/wp/v2/places?cityid=5`;
 const apiOsoite = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql';
 
 searchIDatAPI(apiurl);
+createMap();
+addRoutes();
 
 function searchIDatAPI(apiurl)  {
     fetch(apiurl).then(function(response) {
+        console.log("Hello there");
         return response.json();
     }).then(function(json) {
         addMarkers(json);
@@ -36,6 +40,16 @@ function showID(json){
         console.log(`ID: ${json[i].ID} Title: ${json[i].title} locationPoint[0]_LAT: ${json[i].points[0].locationPoint.lat} locationPoint[0]_LNG: ${json[i].points[0].locationPoint.lng}`);
     }
     addMarkers(json);
+}
+function createMap(){
+    // Käytetään leaflet.js -kirjastoa näyttämään sijainti kartalla (https://leafletjs.com/)
+    // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
+    map = L.map('map',{
+        worldCopyJump: true,
+    }).setView([lat, lng], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 }
 // Paikannetaan laite. Ei ole välttämätön mutta kartalle saadaan merkki!
 function geoFindMe() {
@@ -55,34 +69,7 @@ function geoFindMe() {
         navigator.geolocation.getCurrentPosition(success, error, options);
     }
 }
-// Lisätään merkit kartalle json datan avulla.
-function addMarkers(json) {
-
-    // Käytetään leaflet.js -kirjastoa näyttämään sijainti kartalla (https://leafletjs.com/)
-    // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
-    const map = L.map('map',{
-        worldCopyJump: true,
-    }).setView([lat, lng], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    }).addTo(map);
-
-    for (let i = 0; i < json.length; i++){
-        for (let j = 0; j < json[i].points.length; j++){
-            if (json[i].points[j].locationPoint.lat != null || json[i].points[j].locationPoint.lng != null ){
-                let myPopup = L.popup({
-                    maxHeight: 500,
-                    closeOnClick: false,
-                    keepInView: true
-                }).setContent(json[i].points[j].locationPoint.pointInfo);
-                L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)}).addTo(map)
-                    .bindPopup(myPopup);
-            }
-        }
-    }
-    L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
-        .bindPopup(`Olet tässä noin ${accuracyDistance}m tarkuus alueella`)
-        .openPopup()
+function addRoutes(){
     for (let i = 0; i < fileName.length; i++){
         let geojsonLayer = new L.GeoJSON.AJAX(`json/${fileName[i]}.geojson`, {
             style: function(feature) {
@@ -94,6 +81,26 @@ function addMarkers(json) {
             }});
         geojsonLayer.addTo(map);
     }
+}
+// Lisätään merkit kartalle json datan avulla.
+function addMarkers(json) {
+    for (let i = 0; i < json.length; i++){
+        for (let j = 0; j < json[i].points.length; j++){
+            if (json[i].points[j].locationPoint.lat != null || json[i].points[j].locationPoint.lng != null ){
+                let myPopup = L.popup({
+                    maxHeight: 500,
+                    closeOnClick: false,
+                    keepInView: true,
+                    autoPan: false
+                }).setContent(json[i].points[j].locationPoint.pointInfo);
+                L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)}).addTo(map)
+                    .bindPopup(myPopup);
+            }
+        }
+    }
+    L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
+        .bindPopup(`Olet tässä noin ${accuracyDistance}m tarkuus alueella`, {autoPan: false})
+        .openPopup()
 }
 function pickMarker(locationPoint){
     let words = locationPoint.pointInfo;
