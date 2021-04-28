@@ -84,6 +84,7 @@ function addRoutes(){
 }
 // Lisätään merkit kartalle json datan avulla.
 function addMarkers(json) {
+    let markerClusters = L.markerClusterGroup();
     for (let i = 0; i < json.length; i++){
         for (let j = 0; j < json[i].points.length; j++){
             if (json[i].points[j].locationPoint.lat != null || json[i].points[j].locationPoint.lng != null ){
@@ -93,11 +94,13 @@ function addMarkers(json) {
                     keepInView: true,
                     autoPan: false
                 }).setContent(json[i].points[j].locationPoint.pointInfo);
-                L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)}).addTo(map)
+              let m =  L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)})
                     .bindPopup(myPopup);
+                markerClusters.addLayer(m);
             }
-        }
+        }map.addLayer( markerClusters );
     }
+
     L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
         .bindPopup(`Olet tässä noin ${accuracyDistance}m tarkuus alueella`, {autoPan: false})
         .openPopup()
