@@ -5,6 +5,11 @@ const options = {
     timeout: 5000,
     maximumAge: 0
 };
+let fileName = [
+    "harakka_reititys", "kallahdenniemi_reititys", "keskuspuisto_reititys", "lauttasaari_reitiyys", "mustavuori_reititys",
+    "pajaTali_reititys", "pihlajasaari_reititys", "seurasaari_reititys", "uutela_reititys", "vallisaari_reititys",
+    "vanhankaupunginlahti_reititys", "vasikkasaari_reititys"
+];
 const lat = 60.181576782061356;
 const lng = 24.939455637162748;
 let latitude;
@@ -14,6 +19,7 @@ let accuracyDistance;
 geoFindMe();
 
 let apiurl = `https://citynature.eu/api/wp/v2/places?cityid=5`;
+const apiOsoite = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql';
 
 searchIDatAPI(apiurl);
 
@@ -71,15 +77,30 @@ function addMarkers(json) {
     }
     L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
         .bindPopup(`Olet tässä noin ${accuracyDistance}m tarkuus alueella`)
-        .openPopup();
+        .openPopup()
+    let myStyle = {
+        "color": "#3B6D2E",
+        "weight": 5,
+        "opacity": 0.65
+    };
+    /*
+    L.geoJSON(myLines, {
+        style: myStyle
+    }).addTo(map);
+    */
+    for (let i = 0; i < fileName.length; i++){
+        let geojsonLayer = new L.GeoJSON.AJAX(`json/${fileName[i]}.geojson`, {style : myStyle});
+        geojsonLayer.addTo(map);
+    }
 }
 function pickMarker(words){
     //TODO: Jos joku keksisi paremman idean miten asetetaan merkit niin siitä vaan! :D
     const dictionary = {
-        "merkki" : point,
+        "merkki" : attraction,
         "opastus": infoPoint,
         "kartta": infoPoint,
         "opastaulu": infoPoint,
+        "pääopastaulu": infoPoint,
         "info": infoPoint,
         "oleskelurajoitusalue":warning,
         "museo":attraction,
@@ -88,6 +109,7 @@ function pickMarker(words){
         "lintutorni" : birdtower,
         "ulkoilumaja":shelter,
         "maja":shelter,
+        "jäätelökauppa" : shelter,
         "esteetön":unobstructed,
         "kahvila" : cafeteria,
         "kioskikahvila" : cafeteria,
@@ -126,6 +148,7 @@ function pickMarker(words){
         "parkkialue": parking,
         "piknikpaikka": picnic,
         "piknik": picnic,
+        "levähdyspaikka": picnic,
         "leikkipaikka": playArea,
         "grillialue":firePlace,
         "grillikatos":firePlace,
@@ -133,6 +156,9 @@ function pickMarker(words){
         "grilli":firePlace,
     };
     let word = words.split(/[\s,.<(>)-]+/);
+    if (word.length >= 13){
+        return routeMarker;
+    }
     for (let s = 0; s < word.length; s++){
         word[s] = word[s].toLowerCase();
         if (dictionary.hasOwnProperty(word[s])){
@@ -140,4 +166,72 @@ function pickMarker(words){
         }
     }
     return dictionary["merkki"];
+}
+// haetaan reitti lähtöpisteen ja kohteen avulla
+function haeReitti(lahto, kohde) {
+    // GraphQL haku
+    const haku = `{
+      plan(
+        from: {lat: ${lahto.latitude}, lon: ${lahto.longitude}}
+        to: {lat: ${kohde.latitude}, lon: ${kohde.longitude}}
+        numItineraries: 1
+      ) {
+        itineraries {
+          legs {
+            startTime
+            endTime
+            mode
+            duration
+            distance
+            legGeometry {
+              points
+            }
+          }
+        }
+      }
+    }`;
+
+    const fetchOptions = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({query: haku}), // GraphQL haku lisätään queryyn
+    };
+
+    // lähetetään haku
+    fetch(apiOsoite, fetchOptions).then(function (vastaus) {
+        return vastaus.json();
+    }).then(function (tulos) {
+        console.log(tulos.data.plan.itineraries[0].legs);
+        const googleKoodattuReitti = tulos.data.plan.itineraries[0].legs;
+        for (let i = 0; i < googleKoodattuReitti.length; i++) {
+            let color = '';
+            switch (googleKoodattuReitti[i].mode) {
+                case 'WALK':
+                    color = 'green';
+                    break;
+                case 'BUS':
+                    color = 'red';
+                    break;
+                case 'RAIL':
+                    color = 'cyan'
+                    break;
+                case 'TRAM':
+                    color = 'magenta'
+                    break;
+                default:
+                    color = 'blue';
+                    break;
+            }
+            const reitti = (googleKoodattuReitti[i].legGeometry.points);
+            const pisteObjektit = L.Polyline.fromEncoded(reitti).getLatLngs(); // fromEncoded: muutetaan Googlekoodaus Leafletin Polylineksi
+            L.polyline(pisteObjektit).setStyle({
+                color
+            }).addTo(map);
+        }
+        map.fitBounds([[lahto.latitude, lahto.longitude], [kohde.latitude, kohde.longitude]]);
+    }).catch(function (e) {
+        console.error(e.message);
+    });
 }

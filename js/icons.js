@@ -19,6 +19,7 @@ let signIcon = L.Icon.extend({
 });
 let pointHere = new markerIcon({iconUrl: 'img/svg/punainen_merkki.svg'});
 let point = new markerIcon({iconUrl: 'img/svg/vihrea_merkki.svg'});
+let routeMarker = new markerIcon({iconUrl: 'img/svg/vihrea_merkki.svg'});
 
 let infoPoint = new signIcon({iconUrl: 'img/svg/info.svg'});
 let attraction = new signIcon({iconUrl: 'img/svg/nahtavyys.svg'});
