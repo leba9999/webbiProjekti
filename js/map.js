@@ -14,7 +14,6 @@ const lat = 60.181576782061356;
 const lng = 24.939455637162748;
 let map;
 
-
 let apiurl = `https://citynature.eu/api/wp/v2/places?cityid=5`;
 const apiOsoite = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql';
 
@@ -32,12 +31,6 @@ function searchIDatAPI(apiurl)  {
     });
 }
 
-function showID(json){
-    for (let i = 0; i < json.length; i++){
-        console.log(`ID: ${json[i].ID} Title: ${json[i].title} locationPoint[0]_LAT: ${json[i].points[0].locationPoint.lat} locationPoint[0]_LNG: ${json[i].points[0].locationPoint.lng}`);
-    }
-    addMarkers(json);
-}
 function createMap(){
     // Käytetään leaflet.js -kirjastoa näyttämään sijainti kartalla (https://leafletjs.com/)
     // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
@@ -48,6 +41,7 @@ function createMap(){
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     }).addTo(map);
 }
+
 // Paikannetaan laite. Ei ole välttämätön mutta kartalle saadaan merkki!
 function geoFindMe() {
     function success(position) {
@@ -67,6 +61,7 @@ function geoFindMe() {
         navigator.geolocation.getCurrentPosition(success, error, options);
     }
 }
+
 function addRoutes(){
     for (let i = 0; i < fileName.length; i++){
         let geojsonLayer = new L.GeoJSON.AJAX(`json/${fileName[i]}.geojson`, {
