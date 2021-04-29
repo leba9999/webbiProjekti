@@ -12,12 +12,8 @@ let fileName = [
 ];
 const lat = 60.181576782061356;
 const lng = 24.939455637162748;
-let latitude;
-let longitude;
-let accuracyDistance;
 let map;
 
-geoFindMe();
 
 let apiurl = `https://citynature.eu/api/wp/v2/places?cityid=5`;
 const apiOsoite = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql';
@@ -32,6 +28,7 @@ function searchIDatAPI(apiurl)  {
         return response.json();
     }).then(function(json) {
         addMarkers(json);
+        geoFindMe();
     });
 }
 
@@ -54,11 +51,12 @@ function createMap(){
 // Paikannetaan laite. Ei ole välttämätön mutta kartalle saadaan merkki!
 function geoFindMe() {
     function success(position) {
-        latitude  = position.coords.latitude;
-        longitude = position.coords.longitude;
-        accuracyDistance = position.coords.accuracy;
         // Tulostetaan paikkatiedot konsoliin
-        console.log(`Latitude: ${latitude} °, Longitude: ${longitude} ° \nMore or less ${accuracyDistance} meters.`);
+        console.log(`Latitude: ${position.coords.latitude} °, Longitude: ${position.coords.longitude} ° \nMore or less ${position.coords.accuracy} meters.`);
+
+        L.marker([position.coords.latitude, position.coords.longitude], {icon: pointHere}).addTo(map)
+            .bindPopup(`Olet tässä noin ${position.coords.accuracy}m tarkuus alueella`, {autoPan: false})
+            .openPopup();
     }
     function error() {
         console.error('Unable to retrieve your location');
@@ -84,7 +82,10 @@ function addRoutes(){
 }
 // Lisätään merkit kartalle json datan avulla.
 function addMarkers(json) {
-    let markerClusters = L.markerClusterGroup();
+    let markerClusters = L.markerClusterGroup({
+        maxClusterRadius : 90,
+        disableClusteringAtZoom : 14
+    });
     for (let i = 0; i < json.length; i++){
         for (let j = 0; j < json[i].points.length; j++){
             if (json[i].points[j].locationPoint.lat != null || json[i].points[j].locationPoint.lng != null ){
@@ -98,12 +99,9 @@ function addMarkers(json) {
                     .bindPopup(myPopup);
                 markerClusters.addLayer(m);
             }
-        }map.addLayer( markerClusters );
+        }
     }
-
-    L.marker([latitude, longitude], {icon: pointHere}).addTo(map)
-        .bindPopup(`Olet tässä noin ${accuracyDistance}m tarkuus alueella`, {autoPan: false})
-        .openPopup()
+    map.addLayer( markerClusters );
 }
 function pickMarker(locationPoint){
     let words = locationPoint.pointInfo;
@@ -138,8 +136,10 @@ function pickMarker(locationPoint){
         "kioskikahvila" : cafeteria,
         "jäätelökahvila" : cafeteria,
         "kioski" : cafeteria,
+        "kaffeliiteri" : cafeteria,
         "ravintola" : restaurant,
         "grill": restaurant,
+        "kesäravintola": restaurant,
         "uimaranta" : beach,
         "uimapaikka" : beach,
         "uintipaikka" : beach,
@@ -189,72 +189,4 @@ function pickMarker(locationPoint){
         }
     }
     return dictionary["merkki"];
-}
-// haetaan reitti lähtöpisteen ja kohteen avulla
-function haeReitti(lahto, kohde) {
-    // GraphQL haku
-    const haku = `{
-      plan(
-        from: {lat: ${lahto.latitude}, lon: ${lahto.longitude}}
-        to: {lat: ${kohde.latitude}, lon: ${kohde.longitude}}
-        numItineraries: 1
-      ) {
-        itineraries {
-          legs {
-            startTime
-            endTime
-            mode
-            duration
-            distance
-            legGeometry {
-              points
-            }
-          }
-        }
-      }
-    }`;
-
-    const fetchOptions = {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({query: haku}), // GraphQL haku lisätään queryyn
-    };
-
-    // lähetetään haku
-    fetch(apiOsoite, fetchOptions).then(function (vastaus) {
-        return vastaus.json();
-    }).then(function (tulos) {
-        console.log(tulos.data.plan.itineraries[0].legs);
-        const googleKoodattuReitti = tulos.data.plan.itineraries[0].legs;
-        for (let i = 0; i < googleKoodattuReitti.length; i++) {
-            let color = '';
-            switch (googleKoodattuReitti[i].mode) {
-                case 'WALK':
-                    color = 'green';
-                    break;
-                case 'BUS':
-                    color = 'red';
-                    break;
-                case 'RAIL':
-                    color = 'cyan'
-                    break;
-                case 'TRAM':
-                    color = 'magenta'
-                    break;
-                default:
-                    color = 'blue';
-                    break;
-            }
-            const reitti = (googleKoodattuReitti[i].legGeometry.points);
-            const pisteObjektit = L.Polyline.fromEncoded(reitti).getLatLngs(); // fromEncoded: muutetaan Googlekoodaus Leafletin Polylineksi
-            L.polyline(pisteObjektit).setStyle({
-                color
-            }).addTo(map);
-        }
-        map.fitBounds([[lahto.latitude, lahto.longitude], [kohde.latitude, kohde.longitude]]);
-    }).catch(function (e) {
-        console.error(e.message);
-    });
 }
