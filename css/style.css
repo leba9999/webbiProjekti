@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&display=swap');
 * {
+    /*font-family: 'Antonio', sans-serif;*/
     block-size: border-box;
+}
+
+h2 {
+    font-family: 'Antonio', sans-serif;
 }
 
 body{
