@@ -28,8 +28,7 @@ createMap();
 addRoutes();
 
 var leftSidebar = L.control.sidebar('sidebar-left', {
-    position: 'left',
-    closeButton: false
+    position: 'left'
 });
 map.addControl(leftSidebar);
 
