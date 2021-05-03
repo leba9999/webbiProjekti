@@ -1,15 +1,14 @@
 'use strict';
 
-const jsonDir = 'C:\\Users\\peetu\\WebstormProjects\\webbiProjekti\\json\\webProject.json';
+const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
 fetch(jsonDir)
     .then(function(response) {
       return response.json();
 }).then(function(json) {
-  showData(json);
+  //showData(json);
 
   console.log(json);
 });
-
 
 
 
