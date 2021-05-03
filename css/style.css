@@ -24,6 +24,10 @@ footer{
     background-color: #efefef;
     text-align: center;
 }
+img{
+    max-width: 100%;
+    height: auto;
+}
 #video {
     position: fixed;
     right: 0;

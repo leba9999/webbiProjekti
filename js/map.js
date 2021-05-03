@@ -21,6 +21,24 @@ searchIDatAPI(apiurl);
 createMap();
 addRoutes();
 
+var leftSidebar = L.control.sidebar('sidebar-left', {
+    position: 'left',
+    closeButton: false
+});
+map.addControl(leftSidebar);
+
+var rightSidebar = L.control.sidebar('sidebar-right', {
+    position: 'right'
+});
+map.addControl(rightSidebar);
+leftSidebar.show();
+
+var helloPopup = L.popup().setContent('Hello World!');
+
+L.easyButton('fa fa-bars', function(btn, map){
+    leftSidebar.toggle();
+}).addTo( map );
+
 function searchIDatAPI(apiurl)  {
     fetch(apiurl).then(function(response) {
         console.log("Hello there");
@@ -36,6 +54,7 @@ function createMap(){
     // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
     map = L.map('map',{
         worldCopyJump: true,
+        minZoom : 5
     }).setView([lat, lng], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -90,13 +109,26 @@ function addMarkers(json) {
                     keepInView: true,
                     autoPan: false
                 }).setContent(json[i].points[j].locationPoint.pointInfo);
-              let m =  L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)})
-                    .bindPopup(myPopup);
+                let m;
+                if (json[i].points[j].locationPoint.pointInfo.length >= 60){
+                    m =  L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)})
+                        .on('click', function () {
+                            rightSidebar.show();
+                            rightSidebar.setContent(json[i].points[j].locationPoint.pointInfo);
+                        });
+                }
+                else {
+                    m =  L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)})
+                        .bindPopup(json[i].points[j].locationPoint.pointInfo);
+                }
                 markerClusters.addLayer(m);
             }
         }
     }
     map.addLayer( markerClusters );
+    map.on('click', function(e) {
+        rightSidebar.hide();
+    });
 }
 function pickMarker(locationPoint){
     let words = locationPoint.pointInfo;
