@@ -110,6 +110,8 @@ function pickMarker(locationPoint){
             return specialMarker[i];
         }
     }
+
+
     //TODO: Jos joku keksisi paremman idean miten asetetaan merkit niin siitä vaan! :D
     const dictionary = {
         "merkki" : attraction,
@@ -185,3 +187,13 @@ function pickMarker(locationPoint){
     }
     return dictionary["merkki"];
 }
+
+const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/map_icons.json';
+fetch(jsonDir)
+.then(function(response) {
+    return response.json();
+}).then(function(json) {
+    //showData(json);
+
+    console.log(json);
+});
