@@ -1,5 +1,19 @@
 'use strict';
 
+const jsonDir = 'C:\\Users\\peetu\\WebstormProjects\\webbiProjekti\\json\\webProject.json';
+fetch(jsonDir)
+    .then(function(response) {
+      return response.json();
+}).then(function(json) {
+  showData(json);
+
+  console.log(json);
+});
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
 });

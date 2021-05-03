@@ -1,0 +1,26 @@
+[
+    {
+    "name": "Karttapalvelu",
+    "url": "API:n osoite",
+    "description": "Vapaamuotoista tekstiä", 
+    "img": "kuvakaappaus"
+    },
+    {
+    "name": "Luontoreitit",
+    "url": "API:n osoite",
+    "description": "Vapaamuotoista tekstiä", 
+    "img": "kuvakaappaus"
+    },
+    {
+    "name": "Sääpalvelu",
+    "url": "API:n osoite",
+    "description": "Vapaamuotoista tekstiä", 
+    "img": "kuvakaappaus"
+    },
+    {
+    "name": "Tekijät",
+    "url": null,
+    "description": "Web-tekniikat ja digitaalinen media toteutus TX00DJ99-3021. Ryhmä B.", 
+    "img": null
+    }
+]
