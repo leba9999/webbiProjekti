@@ -27,20 +27,20 @@ nav::after{
     display: inline-block;
   }
 
-  .navli {
-      display: inline-block;
-      position: relative;
-  }
+.navli {
+    display: inline-block;
+    position: relative;
+}
 
-  .nava {
-      display: inline-block;
+.nava {
+    display: inline-block;
     color: white;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
     border-radius: 5px;
-      box-shadow: inset 0px 0px 10px rgb(47, 47, 47);
-  }
+    box-shadow: inset 0px 0px 10px rgb(47, 47, 47);
+}
 .contentBlock{
     display: inline-block;
 }
