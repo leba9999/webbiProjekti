@@ -99,3 +99,7 @@ img{
     background-color: #0099cc;
 }
 
+[class*='col-'] img {
+    width: inherit;
+}
+
