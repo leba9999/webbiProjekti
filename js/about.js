@@ -1,6 +1,7 @@
 'use strict';
 
 const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
+//const jsonDir = '/webbiProjekti/json/webProject.json';
 let jsonText;
 
 fetch(jsonDir)
@@ -21,7 +22,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const menu3 = document.querySelector('#menuLi3');
   const menu4 = document.querySelector('#menuLi4');
 
-  let topic = ['Karttapalvelu', 'Luontoreitit', 'Sääpalvelu', 'Tekijät'];
 
   menu1.addEventListener('click', showText);
   menu2.addEventListener('click', showText);
@@ -30,16 +30,17 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   const currentTopic = document.createElement('h3');
   const currentUrl = document.createElement('a');
-  let description = document.createElement('p');
+  const description = document.createElement('a');
   const img = document.createElement('img');
+  const br = document.createElement('br')
 
   textDiv.appendChild(currentTopic);
   textDiv.appendChild(currentUrl);
+  textDiv.appendChild(br);
   textDiv.appendChild(description);
   textDiv.appendChild(img);
 
   function showText(evt) {
-  let i = 0;
 
     evt.currentTarget === menu1 ? showData(jsonText, 0)
         : evt.currentTarget === menu2 ? showData(jsonText, 1)
@@ -62,12 +63,13 @@ function showData(jsonData, i) {
     currentUrl.href = jsonData[i].url;
     currentUrl.innerText = jsonData[i].url;
   } catch(error) {
+    textDiv.removeChild(currentUrl);
     console.error(error);
     console.log('URLis virhe');
   }
 
   try {
-    description = jsonData[i].description;
+    description.innerText = jsonData[i].description;
   } catch(error) {
     console.error(error);
     console.log('description virhe');
@@ -76,6 +78,7 @@ function showData(jsonData, i) {
   try {
     img.src = jsonData[i].img;
   } catch(error) {
+    textDiv.removeChild(img);
     console.error(error);
     console.log('imagessa virhe');
   }
