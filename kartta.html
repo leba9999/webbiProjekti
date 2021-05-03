@@ -20,13 +20,28 @@
     </header>
     <main>
         <div id="sidebar-left">
-            <h1>left sidebar</h1>
-            <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-            <label for="vehicle1"> I have a bike</label><br>
-            <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-            <label for="vehicle2"> I have a car</label><br>
-            <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
-            <label for="vehicle3"> I have a boat</label><br>
+            <h1>Merkkien Suodatus</h1>
+            <img class="icon" src="img/svg/info.svg"><input type="checkbox" id="infoPoint" name="filter" value="infoPoint">
+            <label for="infoPoint"> Infopisteet</label><br>
+            <img class="icon" src="img/svg/kahvila_kahvikuppi.svg"><input type="checkbox" id="cafeteria" name="filter" value="cafeteria">
+            <label for="cafeteria"> Kahvilat</label><br>
+            <img class="icon" src="img/svg/ravintola.svg"><input type="checkbox" id="restaurant" name="filter" value="restaurant">
+            <label for="restaurant"> Ravintolat</label><br>
+            <img class="icon" src="img/svg/WC.svg"><input type="checkbox" id="wc" name="filter" value="wc">
+            <label for="wc"> Vessat</label><br>
+            <img class="icon" src="img/svg/p_paikka.svg"><input type="checkbox" id="parking" name="filter" value="parking">
+            <label for="parking"> Parkkipaikat</label><br>
+            <img class="icon" src="img/svg/nahtavyys.svg"><input type="checkbox" id="attraction" name="filter" value="attraction">
+            <label for="attraction"> Nähtävyydet</label><br>
+            <img class="icon" src="img/svg/piknik_puu_ja_penkki.svg"><input type="checkbox" id="picnic" name="filter" value="picnic">
+            <label for="picnic"> Levähdyspaikka</label><br>
+            <img class="icon" src="img/svg/uimaranta.svg"><input type="checkbox" id="beach" name="filter" value="beach">
+            <label for="beach"> Uimarannat/paikat</label><br>
+            <img class="icon" src="img/svg/metro_logo.svg"><input type="checkbox" id="metro" name="filter" value="metro">
+            <label for="metro"> Kulkuyhteydet</label><br>
+
+            <img class="markerIcon" src="img/svg/points/vihrea_merkki.svg"><input type="checkbox" id="routeMarker" name="filter" value="routeMarker">
+            <label for="routeMarker"> Rastit</label><br>
         </div>
         <div id="sidebar-right">
         </div>
@@ -40,9 +55,10 @@
     <script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
     <script src="js/icons.js" ></script>
     <script src="js/routeSearch.js" ></script>
-    <script src="js/map.js" ></script>
 
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" ></script>
+    <script src="js/map.js" ></script>
+
 
 
 </body>

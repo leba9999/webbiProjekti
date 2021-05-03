@@ -27,8 +27,8 @@ let shelter  = new signIcon({iconUrl: 'img/svg/kahvila_kahvikuppi_mokissa.svg'})
 let unobstructed  = new signIcon({iconUrl: 'img/svg/esteeton_reitti_helppo.svg'});
 let warning  = new signIcon({iconUrl: 'img/svg/warning_sign.svg'});
 
-let cafeteria = new signIcon({iconUrl: 'img/svg/kahvila_kahvikuppi.svg'});
-let restaurant = new signIcon({iconUrl: 'img/svg/ravintola.svg'});
+let cafeteria = new signIcon({iconUrl: 'img/svg/kahvila_kahvikuppi.svg', classname: 'cafeteria'});
+let restaurant = new signIcon({iconUrl: 'img/svg/ravintola.svg', classname: 'restaurant'});
 let picnic = new signIcon({iconUrl: 'img/svg/piknik_puu_ja_penkki.svg'});
 let playArea = new signIcon({iconUrl: 'img/svg/leikkipaikka.svg'});
 let firePlace = new signIcon({iconUrl: 'img/svg/keittokatos.svg'});
@@ -44,7 +44,7 @@ let birdtower  = new signIcon({iconUrl: 'img/svg/lintutorni.svg'});
 let horses  = new signIcon({iconUrl: 'img/svg/ratsastaja.svg'});
 
 let water  = new signIcon({iconUrl: 'img/svg/juomavesi.svg'});
-let wc_1 = new signIcon({iconUrl: 'img/svg/WC.svg'});
+let wc_1 = new signIcon({iconUrl: 'img/svg/WC.svg', classname: 'wc'});
 let wc_2 = new signIcon({iconUrl: 'img/svg/kaymala.svg'});
 let septitankki = new signIcon({iconUrl: 'img/svg/septitankin_tyhjennys.svg'});
 let venevalkama = new signIcon({iconUrl: 'img/svg/venevalkama.svg'});
