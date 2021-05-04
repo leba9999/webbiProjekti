@@ -5,6 +5,7 @@ const options = {
     timeout: 5000,
     maximumAge: 0
 };
+let allMarkers = [];
 let fileName = [
     "harakka_reititys", "kallahdenniemi_reititys", "keskuspuisto_reititys", "lauttasaari_reitiyys", "mustavuori_reititys",
     "pajaTali_reititys", "pihlajasaari_reititys", "seurasaari_reititys", "uutela_reititys", "vallisaari_reititys",
@@ -14,6 +15,11 @@ const lat = 60.181576782061356;
 const lng = 24.939455637162748;
 let map;
 
+let markerClusters = L.markerClusterGroup({
+    maxClusterRadius : 90,
+    disableClusteringAtZoom : 14
+});
+
 let apiurl = `https://citynature.eu/api/wp/v2/places?cityid=5`;
 const apiOsoite = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql';
 
@@ -21,9 +27,90 @@ searchIDatAPI(apiurl);
 createMap();
 addRoutes();
 
+var leftSidebar = L.control.sidebar('sidebar-left', {
+    position: 'left'
+});
+map.addControl(leftSidebar);
+
+var rightSidebar = L.control.sidebar('sidebar-right', {
+    position: 'right'
+});
+map.addControl(rightSidebar);
+leftSidebar.show();
+
+L.easyButton('fa fa-bars', function(btn, map){
+    leftSidebar.toggle();
+}).addTo( map );
+
+var checkbox = document.querySelectorAll("input[name=filter]");
+
+for (let i = 0; i < checkbox.length; i++){
+    checkbox[i].addEventListener('change', filter);
+}
+function filter(){
+    let checked = false;
+    let checkMarkers = [];
+    for (let i = 0; i < checkbox.length; i++) {
+        if (checkbox[i].checked){
+            checked = true;
+            switch (checkbox[i].value){
+                case "cafeteria":
+                    checkMarkers[checkMarkers.length] = cafeteria;
+                    break;
+                case "restaurant":
+                    checkMarkers[checkMarkers.length] = restaurant;
+                    break;
+                case "wc":
+                    checkMarkers[checkMarkers.length] = wc_1;
+                    checkMarkers[checkMarkers.length] = wc_2;
+                    break;
+                case "parking":
+                    checkMarkers[checkMarkers.length] = parking;
+                    break;
+                case "attraction":
+                    checkMarkers[checkMarkers.length] = attraction;
+                    break;
+                case "picnic":
+                    checkMarkers[checkMarkers.length] = picnic;
+                    break;
+                case "beach":
+                    checkMarkers[checkMarkers.length] = beach;
+                    break;
+                case "routeMarker":
+                    checkMarkers[checkMarkers.length] = routeMarker;
+                    break;
+                case "infoPoint":
+                    checkMarkers[checkMarkers.length] = infoPoint;
+                    break;
+                case "metro":
+                    checkMarkers[checkMarkers.length] = metro;
+                    checkMarkers[checkMarkers.length] = ferry;
+                    break;
+            }
+        }
+    }
+    if (checked == false){
+        for (let i = 0; i < allMarkers.length; i++) {
+
+            markerClusters.removeLayer(allMarkers[i]);
+            markerClusters.addLayer(allMarkers[i]);
+        }
+        map.addLayer( markerClusters );
+        return;
+    }
+    for (let i = 0; i < allMarkers.length; i++) {
+        map.removeLayer(allMarkers[i]);
+        markerClusters.removeLayer(allMarkers[i]);
+        for (let j = 0; j < checkMarkers.length; j++){
+            if (allMarkers[i].options.icon == checkMarkers[j]){
+                markerClusters.addLayer(allMarkers[i]);
+            }
+        }
+    }
+    map.addLayer( markerClusters );
+}
 function searchIDatAPI(apiurl)  {
     fetch(apiurl).then(function(response) {
-        console.log("Hello there");
         return response.json();
     }).then(function(json) {
         addMarkers(json);
@@ -36,6 +123,7 @@ function createMap(){
     // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
     map = L.map('map',{
         worldCopyJump: true,
+        minZoom : 5
     }).setView([lat, lng], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -77,10 +165,6 @@ function addRoutes(){
 }
 // Lisätään merkit kartalle json datan avulla.
 function addMarkers(json) {
-    let markerClusters = L.markerClusterGroup({
-        maxClusterRadius : 90,
-        disableClusteringAtZoom : 14
-    });
     for (let i = 0; i < json.length; i++){
         for (let j = 0; j < json[i].points.length; j++){
             if (json[i].points[j].locationPoint.lat != null || json[i].points[j].locationPoint.lng != null ){
@@ -90,13 +174,30 @@ function addMarkers(json) {
                     keepInView: true,
                     autoPan: false
                 }).setContent(json[i].points[j].locationPoint.pointInfo);
-              let m =  L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)})
-                    .bindPopup(myPopup);
+                let m;
+                if (json[i].points[j].locationPoint.pointInfo.length >= 60){
+                    m =  L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)})
+                        .on('click', function () {
+                            rightSidebar.show();
+                            rightSidebar.setContent(json[i].points[j].locationPoint.pointInfo);
+                        });
+                }
+                else {
+                    m =  L.marker([json[i].points[j].locationPoint.lat, json[i].points[j].locationPoint.lng], {icon: pickMarker(json[i].points[j].locationPoint)})
+                        .bindPopup(myPopup);
+                    //if (m.options.icon === cafeteria)
+                    //if (m.options.icon === cafeteria)
+                        //m.hide();
+                }
+                allMarkers[allMarkers.length] = m;
                 markerClusters.addLayer(m);
             }
         }
     }
     map.addLayer( markerClusters );
+    map.on('click', function(e) {
+        rightSidebar.hide();
+    });
 }
 function pickMarker(locationPoint){
     let words = locationPoint.pointInfo;
@@ -146,6 +247,7 @@ function pickMarker(locationPoint){
         "lauttayhteys":ferry,
         "yhteysvenelaituri":ferry,
         "vesibussiliikenne":ferry,
+        "reittiliikennelaituri": ferry,
         "metro" : metro,
         "metroasema" : metro,
         "koira" : dogpark,

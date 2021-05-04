@@ -3,7 +3,7 @@
     box-sizing: border-box;
 }
 
-h2 {
+h1, h2, h3 {
     font-family: 'Antonio', sans-serif;
 }
 
@@ -23,6 +23,10 @@ footer{
     padding: 1rem;
     background-color: #efefef;
     text-align: center;
+}
+img{
+    max-width: 100%;
+    height: auto;
 }
 #video {
     position: fixed;
@@ -57,6 +61,21 @@ footer{
     height: 100%;
 }
 
+.icon{
+    width: 20px;
+    display: inline-block;
+    position: relative;
+    top: 8px;
+}
+.wc{
+    display: none;
+}
+.markerIcon{
+    width: 20px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+}
 .col-1 {width: 8.33%;}
 .col-2 {width: 16.66%;}
 .col-3 {width: 25%;}
@@ -92,5 +111,9 @@ footer{
 
 .aboutMenu li:hover {
     background-color: #0099cc;
+}
+
+[class*='col-'] img {
+    width: inherit;
 }
 

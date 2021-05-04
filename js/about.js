@@ -1,17 +1,16 @@
 'use strict';
 
 const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
+//const jsonDir = '/webbiProjekti/json/webProject.json';
+let jsonText;
+
 fetch(jsonDir)
     .then(function(response) {
       return response.json();
 }).then(function(json) {
-  //showData(json);
-
-  console.log(json);
+  showData(json, 0);
+  jsonText = json;
 });
-
-
-
 
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed');
@@ -23,7 +22,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const menu3 = document.querySelector('#menuLi3');
   const menu4 = document.querySelector('#menuLi4');
 
-  let topic = ['Karttapalvelu:', 'Luontoreitit:', 'Sääpalvelu:', 'Tekijät:'];
 
   menu1.addEventListener('click', showText);
   menu2.addEventListener('click', showText);
@@ -31,14 +29,57 @@ document.addEventListener('DOMContentLoaded', (event) => {
   menu4.addEventListener('click', showText);
 
   const currentTopic = document.createElement('h3');
-  currentTopic.innerText = topic[0];
+  const currentUrl = document.createElement('a');
+  const description = document.createElement('a');
+  const img = document.createElement('img');
+  const br = document.createElement('br')
+
   textDiv.appendChild(currentTopic);
+  textDiv.appendChild(currentUrl);
+  textDiv.appendChild(br);
+  textDiv.appendChild(description);
+  textDiv.appendChild(img);
 
   function showText(evt) {
-    evt.currentTarget === menu1 ? currentTopic.innerText = topic[0]
-        : evt.currentTarget === menu2 ? currentTopic.innerText = topic[1]
-          : evt.currentTarget === menu3 ? currentTopic.innerText = topic[2]
-            : evt.currentTarget === menu4 ? currentTopic.innerText = topic[3]
-              : currentTopic.innerText = topic[0];
-    //textDiv.appendChild(article);
+
+    evt.currentTarget === menu1 ? showData(jsonText, 0)
+        : evt.currentTarget === menu2 ? showData(jsonText, 1)
+          : evt.currentTarget === menu3 ? showData(jsonText, 2)
+            : evt.currentTarget === menu4 ? showData(jsonText, 3)
+              : currentTopic.innerText = "";
+    //showData(jsonText, 0);
+}
+
+function showData(jsonData, i) {
+    console.log(i);
+  try {
+    currentTopic.innerText = jsonData[i].name;
+  } catch(error) {
+    console.error(error);
+    console.log('nimessä virhe');
+  }
+
+  try {
+    currentUrl.href = jsonData[i].url;
+    currentUrl.innerText = jsonData[i].url;
+  } catch(error) {
+    textDiv.removeChild(currentUrl);
+    console.error(error);
+    console.log('URLis virhe');
+  }
+
+  try {
+    description.innerText = jsonData[i].description;
+  } catch(error) {
+    console.error(error);
+    console.log('description virhe');
+  }
+
+  try {
+    img.src = jsonData[i].img;
+  } catch(error) {
+    textDiv.removeChild(img);
+    console.error(error);
+    console.log('imagessa virhe');
+  }
 }
