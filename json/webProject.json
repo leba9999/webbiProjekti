@@ -13,8 +13,8 @@
     },
     {
     "name": "Sääpalvelu",
-    "url": "API:n osoite",
-    "description": "Vapaamuotoista tekstiä", 
+    "url": "https://weatherwidget.io/",
+    "description": "Kustomoitavissa oleva sää widget",
     "img": null
     },
     {
