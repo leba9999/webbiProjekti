@@ -1,48 +1,51 @@
 'use strict';
-// Asetukset paikkatiedon hakua varten (valinnainen)
-const options = {
-    enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
-};
+
+// Kaikki kartan merkit säilytetään tähän jotta voidaan myöhemmin
+// helmposti asettaa samat merkit takaisin tai poistaa
 let allMarkers = [];
+// geojson tiedostoiden nimet ilman tiedosto päätettä
 let fileName = [
     "harakka_reititys", "kallahdenniemi_reititys", "keskuspuisto_reititys", "lauttasaari_reitiyys", "mustavuori_reititys",
     "pajaTali_reititys", "pihlajasaari_reititys", "seurasaari_reititys", "uutela_reititys", "vallisaari_reititys",
     "vanhankaupunginlahti_reititys", "vasikkasaari_reititys"
 ];
+// Kartan aloituksen keskipiste
 const lat = 60.181576782061356;
 const lng = 24.939455637162748;
 let map;
-
+// merkkien yhdistävä ohjain
 let markerClusters = L.markerClusterGroup({
     maxClusterRadius : 90,
     disableClusteringAtZoom : 14
 });
-
 let apiurl = `https://citynature.eu/api/wp/v2/places?cityid=5`;
-const apiOsoite = 'https://api.digitransit.fi/routing/v1/routers/hsl/index/graphql';
 
+// Laitetaan API haku päälle. Viee eniten aikaa!!
 searchIDatAPI(apiurl);
+// luodaan kartta API haun aikana
 createMap();
+// Lisätään reitit luodulle kartalle
 addRoutes();
-
-var leftSidebar = L.control.sidebar('sidebar-left', {
+// Luodaan vasemmanpuoleinen sivupaneeli kartalle
+let leftSidebar = L.control.sidebar('sidebar-left', {
     position: 'left'
 });
-map.addControl(leftSidebar);
-
-var rightSidebar = L.control.sidebar('sidebar-right', {
+// Luodaan oikeanpuoleinen sivupaneeli kartalle
+let rightSidebar = L.control.sidebar('sidebar-right', {
     position: 'right'
 });
+// lisätään molemmat sivupaneelit kartalle
+map.addControl(leftSidebar);
 map.addControl(rightSidebar);
+// Asetetaan vasemmanpuoleinen paneeli näkyviin
 leftSidebar.show();
-
+// Luodaan kartalle uusi nappi käyttäen easyButton kirjastoa
+// joka pystyy avaamaan/sulkemaan vasemmanpuoleisen sivupaneelin
 L.easyButton('fa fa-bars', function(btn, map){
     leftSidebar.toggle();
 }).addTo( map );
 
-var checkbox = document.querySelectorAll("input[name=filter]");
+let checkbox = document.querySelectorAll("input[name=filter]");
 
 for (let i = 0; i < checkbox.length; i++){
     checkbox[i].addEventListener('change', filter);
@@ -91,7 +94,6 @@ function filter(){
     }
     if (checked == false){
         for (let i = 0; i < allMarkers.length; i++) {
-
             markerClusters.removeLayer(allMarkers[i]);
             markerClusters.addLayer(allMarkers[i]);
         }
@@ -132,6 +134,12 @@ function createMap(){
 
 // Paikannetaan laite. Ei ole välttämätön mutta kartalle saadaan merkki!
 function geoFindMe() {
+    // Asetukset paikkatiedon hakua varten (valinnainen)
+    const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+    };
     function success(position) {
         // Tulostetaan paikkatiedot konsoliin
         console.log(`Latitude: ${position.coords.latitude} °, Longitude: ${position.coords.longitude} ° \nMore or less ${position.coords.accuracy} meters.`);
@@ -149,17 +157,21 @@ function geoFindMe() {
         navigator.geolocation.getCurrentPosition(success, error, options);
     }
 }
-
+// Reittien geojson tiedostot ladataan ja asetetaan kartalle
 function addRoutes(){
+    // Käydään fileName lista läpi
     for (let i = 0; i < fileName.length; i++){
+        // asetetaan GeoJSON tasolle reitti ja tyyli.
         let geojsonLayer = new L.GeoJSON.AJAX(`json/${fileName[i]}.geojson`, {
             style: function(feature) {
                 return {
+                    // feature.properties tarvitaan jotta voidaan käyttää geojson tiedostossa esiintyviä arvoja värille ja leveydelle
                     color: feature.properties['stroke'],
                     width: feature.properties['stroke-width'],
                     opacity: 0.65
                 };
             }});
+        // lisätään geojson taso kartalle
         geojsonLayer.addTo(map);
     }
 }

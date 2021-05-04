@@ -9,7 +9,7 @@ nav{
     text-align: center;
     position: sticky;
     padding-top: 4px;
-    box-shadow: inset 0px 0px 10px rgb(47, 47, 47);
+    <!--box-shadow: inset 0px 0px 10px rgb(47, 47, 47);-->
     top: 0;
     z-index: 2;
 }
@@ -39,20 +39,20 @@ nav::after{
     padding: 14px 16px;
     text-decoration: none;
     border-radius: 5px;
-    box-shadow: inset 0px 0px 10px rgb(47, 47, 47);
+<!--box-shadow: inset 0px 0px 10px rgb(47, 47, 47);-->
 }
 .contentBlock{
     display: inline-block;
 }
 .nava:hover {
-    background-color: rgb(65, 0, 0);
-
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 .navli:hover {
     text-decoration: black;
 }
-/*.navli::before {
+.navli::before {
+    /*
     content: '';
     display: block;
     height: 3.5px;
@@ -62,16 +62,18 @@ nav::after{
     bottom: 3px;
     width: 0%;
 
-    transition: all ease-in-out 500ms;
-}*/
+    transition: all ease-in-out 200ms;
+     */
+}
 .navli:hover::before {
     width: 100%;
-    background-color: rgba(134, 117, 0, 0.32);
+    background-color: rgba(255, 221, 0, 0.32);
 }
 /*Class:*/
 .active{
     background-color: rgb(65, 0, 0);
     background-color: rgb(128, 0, 0);
+    background-color: rgba(0, 0, 0, 0.2);
 }
 .logo-div:hover {
     background-color: rgba(0, 0, 0, 0);
