@@ -8,7 +8,8 @@ let filename = location.href.split('/').pop();
 filename = filename.split('?')[0];
 console.log(`navigation.js: ${filename}`);
 
-let siteTopic = ['Etusivu', 'Kartta', 'Tietoa'];
+let siteTopic = [' Etusivu', ' Kartta', ' Tietoa'];
+let iconClass = ['fa-home', 'fa-map-marked-alt', 'fa-info'];
 let files = ["etusivu.html", "kartta.html", "tietoa.html"];
 
 header.appendChild(nav);
@@ -24,6 +25,8 @@ for(let j = 0; j < files.length; j++) {
     li.classList.add('navli');
     li.appendChild(article);
     article.classList.add('nava');
+    article.classList.add('fas');
+    article.classList.add(iconClass[j]);
     article.href = files[j];
     article.textContent = siteTopic[j];
 
