@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="css/navigationstyle.css">
     <link rel="stylesheet" href="css/style.css">
     <script src="js/navigation.js" defer></script>
+    <script src="js/etusivu.js" defer></script>
     <script src="https://kit.fontawesome.com/6601761448.js" crossorigin="anonymous"></script>
-
 
 </head>
 <body>
@@ -25,7 +25,7 @@
     </div>
 
     <div class="row">
-        <div class="weather col-3">
+        <div id="weather" class="col-3">
             <a class="weatherwidget-io" href="https://forecast7.com/en/60d1724d94/helsinki/" data-label_1="HELSINKi"
                data-label_2="WEATHER" data-icons="Climacons" data-days="5" data-theme="green" data-baseColor=""
                data-shadow="#bd5a14" data-textColor="#f6ddbb" data-highColor="#ffffff" data-lowColor="#d6f4fa"
@@ -44,14 +44,14 @@
             </script>
         </div>
 
-        <div class="col-8 textsField">
+        <div id="textField1" class="col-8 textsField">
             <h3>Mitä Sivulta löytyy?</h3>
             <p>
                 Tältä sivulta löydät tietoa Helsingin alueen ulkoilupaikoista. Sivun kartasta pystyt suodattamaan minkälaisia ulkoilupaikkoja haluat etsiä.
                 Etusivulta löydät sään, jotta osaat hieman suunnitella reissuasi. Hauskoja retki hetkiä!
             </p>
         </div>
-        <div class="col-8 textsField">
+        <div id="textField2" class="col-8 textsField">
             <h3>Kuinka käyttää karttaa?</h3>
             <p>
                 Kartan käyttö on simppeliä. Vasemmalla näkyvästä sivupalkista saat suodatettua näkyville vain ne kohteet jotka kiinnostavat sinua.
@@ -62,9 +62,6 @@
         </div>
     </div>
 
-
-
-
 </main>
 
 <footer>
@@ -72,8 +69,6 @@
     <a href="http://users.metropolia.fi/~samuwah/Digi/synopsisJaKuva.pdf">Synopsis ja Kuvakäsikirjoitus</a>
     <img id="footer-logo" src="img/metropoliaLogo" alt="Metropolian logo">
 </footer>
-
-
 
 </body>
 </html>

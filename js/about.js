@@ -126,8 +126,8 @@ function handleTabletChange(e) {
 
   if (e.matches) {
     console.log('Pieni ruutu achieved!')
-    textDiv.classList.remove('col-9');
-    textDiv.classList.add('col-10');
+    textDiv.classList.remove('col-8');
+    textDiv.classList.add('col-9');
 
     aboutMenu.classList.remove('col-3');
     aboutMenu.classList.add('col-2');
@@ -157,7 +157,7 @@ function handleMiniChange(e) {
   if (e.matches) {
     console.log('Pienin ruutu kaikista achieved!')
 
-    textDiv.classList.remove('col-10');
+    textDiv.classList.remove('col-8');
     textDiv.classList.add('col-9');
 
     aboutMenu.classList.remove('col-2');
@@ -170,8 +170,8 @@ function handleMiniChange(e) {
   } else {
     console.log('Ison näytön tila!')
 
-    textDiv.classList.remove('col-10');
-    textDiv.classList.add('col-9');
+    textDiv.classList.remove('col-9');
+    textDiv.classList.add('col-8');
 
     aboutMenu.classList.remove('col-1');
     aboutMenu.classList.remove('col-2');
