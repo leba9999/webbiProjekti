@@ -57,7 +57,8 @@ footer{
     width: 100%;
     padding: 20px;
 }
-.weather{
+
+#weather{
     padding: 8px;
     background: rgba(0, 0, 0, 0.75);
     margin-top: 10px;
