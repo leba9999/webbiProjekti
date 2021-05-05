@@ -17,15 +17,7 @@ html, main{
 
     height: calc(100% - 30px);
 }
-footer{
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    padding: 1rem;
-    background-color: #efefef;
-    text-align: center;
-}
+
 
 footer {
     text-align: center;
@@ -36,8 +28,6 @@ footer {
     justify-content: center;
     font-family: 'Ubuntu', sans-serif;
 }
-
-
 
 [id='sidebar-right'] img{
     max-width: 100%;
@@ -176,6 +166,14 @@ padding: 0 10px 0 0;
     box-sizing: inherit;
     max-height: 1035px;
     overflow: inherit;
+}
+
+
+#footer-logo{
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 36px;
+    width: 34px;
 }
 
 
