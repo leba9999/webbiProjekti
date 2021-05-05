@@ -17,9 +17,11 @@ body{
 }
 #karttaHtml, #karttaMain{
     height: calc(100% - 52px);
-    padding: 0;
 }
 
+#karttabody{
+    padding: 0;
+}
 
 footer{
     margin-top: auto;
@@ -203,7 +205,13 @@ padding: 0 10px 0 0;
     .aboutMenu li::after{
         display: block;
     }
-
+    .textsField {
+        font-size: medium;
+        padding: 10px 10px 10px 10px;
+    }
+    #textField{
+        font-size: small;
+    }
     footer{
         font-size: small;
     }
