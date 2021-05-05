@@ -117,8 +117,9 @@ function setActive(active) {
               : active;
   }
 
+// tämän osuuden source: https://css-tricks.com/working-with-javascript-media-queries/
+// ensiksi haetaan mediasäännöt
 const mediaQuery = window.matchMedia('(max-width: 750px)');
-
 
 function handleTabletChange(e) {
 
