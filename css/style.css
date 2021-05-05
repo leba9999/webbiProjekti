@@ -13,8 +13,7 @@ body{
     background-color: rgb(47, 47, 47);
     height: 100%;
 }
-html, main{
-
+#karttaHtml, #karttaMain{
     height: calc(100% - 30px);
 }
 footer{
@@ -137,14 +136,12 @@ padding: 0 10px 0 0;
     background-position: center, center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
 }
 
 [class*='col-'] img {
     width: inherit;
     max-width: 800px;
+    overflow: inherit;
 }
 
 .active{
@@ -156,9 +153,12 @@ padding: 0 10px 0 0;
     font-family: 'Ubuntu', sans-serif;
     background: rgba(0, 0, 0, 0.75);
     color: #f1f1f1;
+    margin-top: 10px;
     padding: 10px 10px 10px 100px;
     font-size: larger;
     box-sizing: inherit;
+    /*max-height: 100%;*/
+    overflow: hidden;
     max-height: 1035px;
     overflow: inherit;
 }

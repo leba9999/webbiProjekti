@@ -1,7 +1,7 @@
 'use strict';
 
-//const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
-const jsonDir = 'json/webProject.json';
+const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
+//const jsonDir = 'json/webProject.json';
 let jsonText;
 
 fetch(jsonDir)
@@ -86,7 +86,7 @@ function showData(jsonData, i) {
   }
 
   setActive(jsonData[i].name);
-
+  textDiv.style.overflow = 'hidden';
   /*switch(jsonData[i].name) {
     case 'Karttapalvelu':
       menu1.classList.add("active");
