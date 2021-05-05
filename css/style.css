@@ -12,6 +12,8 @@ h1, h2, h3 {
 body{
     background-color: rgb(47, 47, 47);
     min-height: 100vh;
+    position: relative;
+    padding-bottom: 80px;
 }
 #karttaHtml, #karttaMain{
     height: calc(100% - 52px);
@@ -19,11 +21,11 @@ body{
 
 
 footer{
-    margin-top: 50px;
-    position: fixed;
-    right: 0;
+    margin-top: auto;
+    position: absolute;
     bottom: 0;
     left: 0;
+    right: 0;
     text-align: center;
     padding: 3px;
     background: rgba(0, 0, 0, 0.75);
@@ -185,7 +187,6 @@ padding: 0 10px 0 0;
     width: 34px;
 }
 
-
 @media screen and (max-width: 750px) {
     .iconText{
         display: none;
@@ -202,10 +203,4 @@ padding: 0 10px 0 0;
     footer{
         font-size: small;
     }
-
-
-    p{
-        font-size: smaller;
-    }
 }
-
