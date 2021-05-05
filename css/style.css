@@ -165,8 +165,9 @@ padding: 0 10px 0 0;
 
 #footer-logo{
     margin-left: 10px;
-    height: 50px;
-    width: 40px;
+    margin-right: 10px;
+    height: 36px;
+    width: 34px;
 }
 
 
@@ -189,6 +190,10 @@ padding: 0 10px 0 0;
     }
     li::after{
         display: block;
+    }
+
+    footer{
+        font-size: small;
     }
 }
 
