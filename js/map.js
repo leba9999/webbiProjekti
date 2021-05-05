@@ -127,8 +127,7 @@ function searchIDatAPI(apiurl)  {
 }
 // Luodaan kartta
 function createMap(){
-    // Käytetään leaflet.js -kirjastoa näyttämään sijainti kartalla (https://leafletjs.com/)
-    // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
+    // Käytetään leaflet.js -kirjastoa
     map = L.map('map',{
         worldCopyJump: true,
         minZoom : 5
