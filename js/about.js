@@ -1,7 +1,7 @@
 'use strict';
 
-const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
-//const jsonDir = '/webbiProjekti/json/webProject.json';
+//const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
+const jsonDir = '/webbiProjekti/json/webProject.json';
 let jsonText;
 
 fetch(jsonDir)
@@ -32,12 +32,14 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const currentUrl = document.createElement('a');
   const description = document.createElement('a');
   const img = document.createElement('img');
-  const br = document.createElement('br')
+  const br = document.createElement('br');
+  const br2 = document.createElement('br');
 
   textDiv.appendChild(currentTopic);
   textDiv.appendChild(currentUrl);
   textDiv.appendChild(br);
   textDiv.appendChild(description);
+  textDiv.appendChild(br2);
   textDiv.appendChild(img);
 
   function showText(evt) {
@@ -82,4 +84,35 @@ function showData(jsonData, i) {
     console.error(error);
     console.log('imagessa virhe');
   }
+
+  setActive(jsonData[i].name);
+
+  /*switch(jsonData[i].name) {
+    case 'Karttapalvelu':
+      menu1.classList.add("active");
+      break;
+    case 'Luontoreitit':
+      menu2.classList.add("active");
+      break;
+    case 'Sääpalvelu':
+      menu3.classList.add("active");
+      break;
+    case 'Tekijätiedot':
+      menu4.classList.add("active");
+      break;
+  }*/
 }
+
+function setActive(active) {
+
+  menu1.classList.remove('active');
+  menu2.classList.remove('active');
+  menu3.classList.remove('active');
+  menu4.classList.remove('active');
+
+  active === menu1.textContent ? menu1.classList.add("active")
+    : active === menu2.textContent ? menu2.classList.add("active")
+      : active === menu3.textContent ? menu3.classList.add("active")
+          : active === menu4.textContent ? menu4.classList.add("active")
+              : active;
+  }
