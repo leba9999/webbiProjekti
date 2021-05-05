@@ -119,7 +119,8 @@ function setActive(active) {
 
 // tämän osuuden source: https://css-tricks.com/working-with-javascript-media-queries/
 // ensiksi haetaan mediasäännöt
-const mediaQuery = window.matchMedia('(max-width: 750px)');
+  const mediaQuery = window.matchMedia('(max-width: 750px)');
+  const mediaQuery2 = window.matchMedia('(max-width: 450px)');
 
 function handleTabletChange(e) {
 
@@ -131,16 +132,61 @@ function handleTabletChange(e) {
     aboutMenu.classList.remove('col-3');
     aboutMenu.classList.add('col-2');
     aboutMenu.style.padding = 0;
+    textDiv.style.position = 'static';
+    textDiv.style.left = '0';
   } else {
-    console.log('Ison näytön tila!')
+
+    handleMiniChange(mediaQuery2)
+    /*console.log('Ison näytön tila!')
     textDiv.classList.remove('col-10');
     textDiv.classList.add('col-9');
 
     aboutMenu.classList.remove('col-2');
-    aboutMenu.classList.add('col-3');
-    aboutMenu.style.padding = '0 10px 0 0';
+    aboutMenu.classList.add('col-3');*/
+    //aboutMenu.style.padding = '0 10px 0 0';
   }
 }
 
-mediaQuery.addListener(handleTabletChange);
- handleTabletChange(mediaQuery);
+  mediaQuery.addListener(handleTabletChange);
+  handleTabletChange(mediaQuery);
+
+  mediaQuery2.addListener(handleMiniChange)
+  handleMiniChange(mediaQuery2);
+
+function handleMiniChange(e) {
+  if (e.matches) {
+    console.log('Pienin ruutu kaikista achieved!')
+
+    textDiv.classList.remove('col-10');
+    textDiv.classList.add('col-9');
+
+    aboutMenu.classList.remove('col-2');
+    aboutMenu.classList.remove('col-3');
+    aboutMenu.classList.add('col-1');
+
+    textDiv.style.position = 'relative';
+    textDiv.style.left = '50px';
+    aboutMenu.style.padding = '0px 10px 0px 0px';
+  } else {
+    console.log('Ison näytön tila!')
+
+    textDiv.classList.remove('col-10');
+    textDiv.classList.add('col-9');
+
+    aboutMenu.classList.remove('col-1');
+    aboutMenu.classList.remove('col-2');
+    aboutMenu.classList.add('col-3');
+    textDiv.style.position = 'static';
+    textDiv.style.left = '0';
+    aboutMenu.style.padding = '0px 10px 0px 0px';/*
+    console.log('Pieni ruutu achieved!')
+    textDiv.classList.remove('col-9');
+    textDiv.classList.add('col-10');
+
+    aboutMenu.classList.remove('col-1');
+    aboutMenu.classList.add('col-2');
+    textDiv.style.position = 'static';
+    aboutMenu.style.left = 0;*/
+    //aboutMenu.style.zIndex = 0;
+  }
+}
