@@ -41,7 +41,7 @@ map.addControl(rightSidebar);
 leftSidebar.show();
 // Luodaan kartalle uusi nappi käyttäen easyButton kirjastoa
 // joka pystyy avaamaan/sulkemaan vasemmanpuoleisen sivupaneelin
-L.easyButton('fa fa-bars', function(btn, map){
+L.easyButton('fas fa-compass', function(btn, map){
     leftSidebar.toggle();
 }).addTo( map );
 

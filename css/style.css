@@ -173,7 +173,14 @@ padding: 0 10px 0 0;
         max-height: 1035px;
         overflow: inherit;
     }
-    .aboutMenu li{
-        font-size: small;
+    .iconText{
+        display: none;
+    }
+    li{
+        display: inline-block;
+    }
+    li::after{
+        display: block;
     }
 }
+

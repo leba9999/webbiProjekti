@@ -1,7 +1,7 @@
 'use strict';
 
-const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
-//const jsonDir = '/webbiProjekti/json/webProject.json';
+//const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
+const jsonDir = 'json/webProject.json';
 let jsonText;
 
 fetch(jsonDir)
