@@ -32,7 +32,8 @@ footer {
     padding: 3px;
     background: rgba(0, 0, 0, 0.75);
     color: white;
-    display: block;
+    display: flex;
+    justify-content: center;
     font-family: 'Ubuntu', sans-serif;
 }
 
@@ -161,6 +162,13 @@ padding: 0 10px 0 0;
     max-height: 1035px;
     overflow: inherit;
 }
+
+#footer-logo{
+    margin-left: 10px;
+    height: 50px;
+    width: 40px;
+}
+
 
 @media screen and (max-width: 750px) {
     #textField {
