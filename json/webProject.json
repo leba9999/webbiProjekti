@@ -11,20 +11,20 @@
         "url": "https://citynature.eu/fi/kehittajille/",
         "urlText": "Citynature.eu",
         "description": "Citynature.eu tarjoaa avoimen REST API -rajapinnan CC BY 4.0 -lisenssillä.<br>Citynaturen REST API tarjoaa Helsingin ja Tallinan luontoreitit eri kielillä. Luontoreittien varelta löytyy erillaisia nähtävyyksiä ja kohteita.",
-        "img": "https://citynature.eu/wp-content/uploads/Kallahdenharju-1.jpg)"
+        "img": "https://citynature.eu/wp-content/uploads/Kallahdenharju-1.jpg"
     },
     {
         "name": "Sääpalvelu",
         "url": "https://forecast7.com/en/60d1724d94/helsinki/",
         "urlText": "Forecast7.com",
-        "description": "<h3>Weatherwidget.io</h3>Sivulla toimii <a href=\"https://weatherwidget.io/\">weatherwidgetin</a> tajoama sää widgetti. Widgetti näyttää helsingin alueen viidenpäivän sää ennusteen.<h3>Openweathermap.org</h3> Sääpalvelun tietolähteenä toimii <a href=\"https://openweathermap.org\">OpenWeather</a>.",
+        "description": "<h3>Weatherwidget.io</h3>Sivulla toimii <a href=\"https://weatherwidget.io/\">weatherwidgetin</a> tajoama sää widgetti. Widgetti näyttää helsingin alueen viidenpäivän sää ennusteen.<h3>Openweathermap.org</h3><p>Sääpalvelun tietolähteenä toimii </p><a href=\"https://openweathermap.org\">OpenWeather</a><p>.</p>",
         "img": "img/widgetLogo.jpg"
     },
     {
         "name": "Tekijätiedot",
         "url": "https://github.com/leba9999/webbiProjekti",
         "urlText": "GitHub",
-        "description": "Web-tekniikat ja digitaalinen media toteutus TX00DJ99-3021. Ryhmä B.<h3>Video</h3><a href=\"http://users.metropolia.fi/~samuwah/Digi/synopsisJaKuva.pdf\">Synopsis ja Kuvakäsikirjoitus</a><h3>Tekijät:</h3><ul><li>Leevi Koskinen</li><li>Roope Sarasoja</li><li>Peetu Salonen</li><li>Samu Wahlroos</li></ul>",
+        "description": "<p>Web-tekniikat ja digitaalinen media toteutus TX00DJ99-3021. Ryhmä B.</p><h3>Video</h3><a href=\"http://users.metropolia.fi/~samuwah/Digi/synopsisJaKuva.pdf\">Synopsis ja Kuvakäsikirjoitus</a><h3>Tekijät:</h3><ul><li><p>Leevi Koskinen</p></li><li><p>Roope Sarasoja</p></li><li><p>Peetu Salonen</p></li><li><p>Samu Wahlroos</p></li></ul>",
         "img": "https://www.metropolia.fi/themes/basic/images/metropolia.svg"
     }
 ]

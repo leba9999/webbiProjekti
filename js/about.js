@@ -80,6 +80,7 @@ function showData(jsonData, i) {
 
   try {
     img.src = jsonData[i].img;
+    img.alt = "logo";
   } catch(error) {
     textDiv.removeChild(img);
     console.error(error);

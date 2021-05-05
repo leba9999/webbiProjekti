@@ -13,7 +13,6 @@ nav{
     border-bottom: 2px solid rgb(0, 39, 1);
     text-align: center;
     padding-top: 4px;
-    <!--box-shadow: inset 0px 0px 10px rgb(47, 47, 47);-->
 }
 body{
     margin: 0px;
@@ -42,7 +41,6 @@ nav::after{
     padding: 14px 16px;
     text-decoration: none;
     border-radius: 5px;
-<!--box-shadow: inset 0px 0px 10px rgb(47, 47, 47);-->
 }
 .contentBlock{
     display: inline-block;
