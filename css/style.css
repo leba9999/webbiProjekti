@@ -28,6 +28,8 @@ footer {
     font-family: 'Ubuntu', sans-serif;
 }
 
+
+
 [id='sidebar-right'] img{
     max-width: 100%;
     height: auto;
@@ -173,22 +175,15 @@ padding: 0 10px 0 0;
 }
 
 
-#footer-logo{
-    margin-left: 10px;
-    margin-right: 10px;
-    height: 36px;
-    width: 34px;
-}
-
-
 @media screen and (max-width: 750px) {
     .iconText{
         display: none;
     }
-    li{
-        display: inline-block;
+    .aboutMenu li{
+        display: block;
+        width: 34px;
     }
-    li::after{
+    .aboutMenu li::after{
         display: block;
     }
 
