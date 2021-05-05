@@ -57,6 +57,9 @@ footer{
 .weather{
     padding: 8px;
     background: rgba(0, 0, 0, 0.75);
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-left: 50px;
 }
 #map {
     width: 100%;
@@ -167,6 +170,7 @@ padding: 0 10px 0 0;
     box-sizing: inherit;
     max-height: 1035px;
     overflow: inherit;
+    margin-top: 10px;
 }
 
 #footer-logo{
