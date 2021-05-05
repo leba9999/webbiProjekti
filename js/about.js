@@ -1,7 +1,7 @@
 'use strict';
 
-const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
-//const jsonDir = 'json/webProject.json';
+//const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/webProject.json';
+const jsonDir = 'json/webProject.json';
 let jsonText;
 
 fetch(jsonDir)
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   const currentTopic = document.createElement('h3');
   const currentUrl = document.createElement('a');
-  const description = document.createElement('a');
+  const description = document.createElement('p');
   const img = document.createElement('img');
   const br = document.createElement('br');
   const br2 = document.createElement('br');
@@ -63,7 +63,8 @@ function showData(jsonData, i) {
 
   try {
     currentUrl.href = jsonData[i].url;
-    currentUrl.innerText = jsonData[i].url;
+    currentUrl.innerText = jsonData[i].urlText;
+    currentUrl.target = "_blank";
   } catch(error) {
     textDiv.removeChild(currentUrl);
     console.error(error);
@@ -71,7 +72,7 @@ function showData(jsonData, i) {
   }
 
   try {
-    description.innerText = jsonData[i].description;
+    description.innerHTML = jsonData[i].description;
   } catch(error) {
     console.error(error);
     console.log('description virhe');
