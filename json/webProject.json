@@ -17,7 +17,7 @@
         "name": "Sääpalvelu",
         "url": "https://forecast7.com/en/60d1724d94/helsinki/",
         "urlText": "Forecast7.com",
-        "description": "<h3>Weatherwidget.io</h3>Sivulla toimii <a href=\"https://weatherwidget.io/\">weatherwidgetin</a> tajoama sää widgetti. Widgetti näyttää helsingin alueen viidenpäivän sää ennusteen.<h3>Openweathermap.org</h3><p>Sääpalvelun tietolähteenä toimii </p><a href=\"https://openweathermap.org\">OpenWeather</a><p>.</p>",
+        "description": "<h3>Weatherwidget.io</h3>Sivulla toimii <a href=\"https://weatherwidget.io/\">weatherwidgetin</a> tajoama sää widgetti. Widgetti näyttää helsingin alueen viidenpäivän sää ennusteen.<h3>Openweathermap.org</h3><p>Sääpalvelun tietolähteenä toimii </p><a href=\"https://openweathermap.org\">OpenWeather</a>",
         "img": "img/widgetLogo.jpg"
     },
     {
