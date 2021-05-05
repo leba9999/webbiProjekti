@@ -11,11 +11,10 @@ h1, h2, h3 {
 
 body{
     background-color: rgb(47, 47, 47);
-    height: 100%;
+    min-height: 100vh;
 }
-html, main{
-
-    height: calc(100% - 30px);
+#karttaHtml, #karttaMain{
+    height: calc(100% - 52px);
 }
 
 
@@ -127,9 +126,6 @@ padding: 0 10px 0 0;
     background-position: center, center;
     background-repeat: no-repeat;
     background-size: cover;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
 }
 
 [class*='col-'] img {
@@ -166,6 +162,14 @@ padding: 0 10px 0 0;
     box-sizing: inherit;
     max-height: 1035px;
     overflow: inherit;
+}
+
+#footer-logo{
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 36px;
+    width: 34px;
 }
 
 
