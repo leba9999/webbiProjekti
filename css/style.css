@@ -18,7 +18,12 @@ body{
 }
 
 
-footer {
+footer{
+    margin-top: 50px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
     text-align: center;
     padding: 3px;
     background: rgba(0, 0, 0, 0.75);
@@ -27,8 +32,6 @@ footer {
     justify-content: center;
     font-family: 'Ubuntu', sans-serif;
 }
-
-
 
 [id='sidebar-right'] img{
     max-width: 100%;
@@ -175,20 +178,32 @@ padding: 0 10px 0 0;
 }
 
 
+#footer-logo{
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 36px;
+    width: 34px;
+}
+
+
 @media screen and (max-width: 750px) {
     .iconText{
         display: none;
     }
-    .aboutMenu li{
-        display: block;
-        width: 34px;
+    li{
+        display: inline-block;
     }
-    .aboutMenu li::after{
+    li::after{
         display: block;
     }
 
     footer{
         font-size: small;
+    }
+
+
+    p{
+        font-size: smaller;
     }
 }
 
