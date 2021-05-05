@@ -32,7 +32,8 @@ footer {
     padding: 3px;
     background: rgba(0, 0, 0, 0.75);
     color: white;
-    display: block;
+    display: flex;
+    justify-content: center;
     font-family: 'Ubuntu', sans-serif;
 }
 
@@ -144,6 +145,7 @@ padding: 0 10px 0 0;
 [class*='col-'] img {
     width: inherit;
     max-width: 800px;
+    overflow: inherit;
 }
 
 .active{
@@ -155,9 +157,12 @@ padding: 0 10px 0 0;
     font-family: 'Ubuntu', sans-serif;
     background: rgba(0, 0, 0, 0.75);
     color: #f1f1f1;
+    margin-top: 10px;
     padding: 10px 10px 10px 100px;
     font-size: larger;
     box-sizing: inherit;
+    /*max-height: 100%;*/
+    overflow: hidden;
     max-height: 1035px;
     overflow: inherit;
 }
@@ -175,17 +180,18 @@ padding: 0 10px 0 0;
 
 
 @media screen and (max-width: 750px) {
-    #textField {
-        font-family: 'Ubuntu', sans-serif;
-        background: rgba(0, 0, 0, 0.75);
-        color: #f1f1f1;
-        padding: 10px 10px 10px 100px;
-        font-size: small;
-        box-sizing: inherit;
-        max-height: 1035px;
-        overflow: inherit;
+    .iconText{
+        display: none;
     }
-    .aboutMenu li{
+    li{
+        display: inline-block;
+    }
+    li::after{
+        display: block;
+    }
+
+    footer{
         font-size: small;
     }
 }
+
