@@ -17,6 +17,7 @@ body{
 }
 #karttaHtml, #karttaMain{
     height: calc(100% - 52px);
+    padding: 0;
 }
 
 
