@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Antonio:wght@100;200;300;400;500;600;700&display=swap');
-/*Navigation style:*/
+/*Navigation style: */
 header{
     position: sticky;
     top: 0;
@@ -21,19 +21,19 @@ body{
 nav::after{
   clear: both;
 }
+
+/*Class: */
 .navul {
     list-style-type: none;
     margin: 0;
     padding: 0;
     overflow: hidden;
     display: inline-block;
-  }
-
+}
 .navli {
     display: inline-block;
     position: relative;
 }
-
 .nava {
     display: inline-block;
     color: white;
@@ -48,32 +48,14 @@ nav::after{
 .nava:hover {
     background-color: rgba(0, 0, 0, 0.5);
 }
-
 .navli:hover {
     text-decoration: black;
-}
-.navli::before {
-    /*
-    content: '';
-    display: block;
-    height: 3.5px;
-    background-color: rgba(255, 221, 0, 0.32);
-
-    position: absolute;
-    bottom: 3px;
-    width: 0%;
-
-    transition: all ease-in-out 200ms;
-     */
 }
 .navli:hover::before {
     width: 100%;
     background-color: rgba(255, 221, 0, 0.32);
 }
-/*Class:*/
 .active{
-    background-color: rgb(65, 0, 0);
-    background-color: rgb(128, 0, 0);
     background-color: rgba(0, 0, 0, 0.2);
 }
 .logo-div:hover {
