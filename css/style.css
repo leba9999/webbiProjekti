@@ -11,10 +11,10 @@ h1, h2, h3 {
 
 body{
     background-color: rgb(47, 47, 47);
-    height: 100%;
+    min-height: 100vh;
 }
 #karttaHtml, #karttaMain{
-    height: calc(100% - 30px);
+    height: calc(100% - 52px);
 }
 footer{
     position: absolute;
@@ -132,7 +132,6 @@ padding: 0 10px 0 0;
 
 #aboutMain {
     background-image: url("../img/IMG_20210428_164239.jpg");
-    /*background-size: 1905px;*/
     background-position: center, center;
     background-repeat: no-repeat;
     background-size: cover;
