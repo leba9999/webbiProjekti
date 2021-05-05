@@ -50,6 +50,8 @@ let checkbox = document.querySelectorAll("input[name=filter]");
 for (let i = 0; i < checkbox.length; i++){
     checkbox[i].addEventListener('change', filter);
 }
+// Merkkien suodatus. Eli poistetaan kartalta merkkejä ja lisätään
+// jos käyttäjä valitsee checkboxeista jonkun
 function filter(){
     let checked = false;
     let checkMarkers = [];
@@ -92,6 +94,9 @@ function filter(){
             }
         }
     }
+    // jos ei ole yhtäkään merkkiä valittu lisätään kaikki merkit takaisin
+    // mutta varmistetaan nyt 100% ettei tule kopioita merkeistä poistamalla aikaisempi merkki
+    // ja lisätään takaisin (on turhaa työtä mutta ennemmin varmistetaan)
     if (checked == false){
         for (let i = 0; i < allMarkers.length; i++) {
             markerClusters.removeLayer(allMarkers[i]);
@@ -111,6 +116,7 @@ function filter(){
     }
     map.addLayer( markerClusters );
 }
+// Haetaan luontoreittien tiedot
 function searchIDatAPI(apiurl)  {
     fetch(apiurl).then(function(response) {
         return response.json();
@@ -119,7 +125,7 @@ function searchIDatAPI(apiurl)  {
         geoFindMe();
     });
 }
-
+// Luodaan kartta
 function createMap(){
     // Käytetään leaflet.js -kirjastoa näyttämään sijainti kartalla (https://leafletjs.com/)
     // setView asettaa näkymän näihin fixattuihin koordinaatteihin zoomilla 13
@@ -211,6 +217,7 @@ function addMarkers(json) {
         rightSidebar.hide();
     });
 }
+// valitaan kuvaukseen sopiva merkki ja palauttaa sen.
 function pickMarker(locationPoint){
     let words = locationPoint.pointInfo;
     let coordinates = locationPoint;
@@ -223,9 +230,7 @@ function pickMarker(locationPoint){
             return specialMarker[i];
         }
     }
-
-
-    //TODO: Jos joku keksisi paremman idean miten asetetaan merkit niin siitä vaan! :D
+    //TODO: Jos joku keksisi paremman idean miten asetetaan merkit, niin ehdottomasti kokeillaan!
     const dictionary = {
         "merkki" : attraction,
         "opastus": infoPoint,
@@ -289,6 +294,7 @@ function pickMarker(locationPoint){
         "nuotio":firePlace,
         "grilli":firePlace,
     };
+    // koitetaan kiertää ongelma jäätelö-kahvila. Slitillä saadaan heitettyä - merkki irti ja kahvila erikseen
     let word = words.split(/[\s,.<(>)-]+/);
     if (word.length >= 25){
         return routeMarker;
@@ -301,13 +307,3 @@ function pickMarker(locationPoint){
     }
     return dictionary["merkki"];
 }
-
-const jsonDir = 'https://raw.githubusercontent.com/leba9999/webbiProjekti/master/json/map_icons.json';
-fetch(jsonDir)
-.then(function(response) {
-    return response.json();
-}).then(function(json) {
-    //showData(json);
-
-    console.log(json);
-});
