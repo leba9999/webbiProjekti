@@ -26,10 +26,12 @@ footer{
     background-color: #efefef;
     text-align: center;
 }
-img{
+
+[id='sidebar-right'] img{
     max-width: 100%;
     height: auto;
 }
+
 #video {
     position: fixed;
     right: 0;
@@ -101,6 +103,10 @@ img{
     display: table;
 }
 
+.aboutMenu {
+padding: 0 10px 0 0;
+}
+
 .aboutMenu li{
     font-family: 'Antonio', sans-serif;
     padding: 8px;
@@ -132,6 +138,7 @@ img{
 
 [class*='col-'] img {
     width: inherit;
+    max-width: 800px;
 }
 
 .active{
