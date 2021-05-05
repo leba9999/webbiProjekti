@@ -132,6 +132,7 @@ padding: 0 10px 0 0;
 
 #aboutMain {
     background-image: url("../img/IMG_20210428_164239.jpg");
+    /*background-size: 1905px;*/
     background-position: center, center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -158,6 +159,17 @@ padding: 0 10px 0 0;
     box-sizing: inherit;
     /*max-height: 100%;*/
     overflow: hidden;
+    max-height: 1035px;
+    overflow: inherit;
+}
+
+.textsField {
+    font-family: 'Ubuntu', sans-serif;
+    background: rgba(0, 0, 0, 0.75);
+    color: #f1f1f1;
+    padding: 10px 10px 10px 100px;
+    font-size: larger;
+    box-sizing: inherit;
     max-height: 1035px;
     overflow: inherit;
 }
