@@ -32,7 +32,8 @@ footer {
     padding: 3px;
     background: rgba(0, 0, 0, 0.75);
     color: white;
-    display: block;
+    display: flex;
+    justify-content: center;
     font-family: 'Ubuntu', sans-serif;
 }
 
@@ -162,6 +163,15 @@ padding: 0 10px 0 0;
     overflow: inherit;
 }
 
+#footer-logo{
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    height: 36px;
+    width: 34px;
+}
+
+
 @media screen and (max-width: 750px) {
     .iconText{
         display: none;
@@ -171,6 +181,10 @@ padding: 0 10px 0 0;
     }
     li::after{
         display: block;
+    }
+
+    footer{
+        font-size: small;
     }
 }
 
