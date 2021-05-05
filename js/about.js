@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   const menu2 = document.querySelector('#menuLi2');
   const menu3 = document.querySelector('#menuLi3');
   const menu4 = document.querySelector('#menuLi4');
-
+  const aboutMenu = document.querySelector('.aboutMenu');
 
   menu1.addEventListener('click', showText);
   menu2.addEventListener('click', showText);
@@ -116,3 +116,30 @@ function setActive(active) {
           : active === menu4.textContent ? menu4.classList.add("active")
               : active;
   }
+
+const mediaQuery = window.matchMedia('(max-width: 750px)');
+
+
+function handleTabletChange(e) {
+
+  if (e.matches) {
+    console.log('Pieni ruutu achieved!')
+    textDiv.classList.remove('col-9');
+    textDiv.classList.add('col-10');
+
+    aboutMenu.classList.remove('col-3');
+    aboutMenu.classList.add('col-2');
+    aboutMenu.style.padding = 0;
+  } else {
+    console.log('Ison näytön tila!')
+    textDiv.classList.remove('col-10');
+    textDiv.classList.add('col-9');
+
+    aboutMenu.classList.remove('col-2');
+    aboutMenu.classList.add('col-3');
+    aboutMenu.style.padding = '0 10px 0 0';
+  }
+}
+
+mediaQuery.addListener(handleTabletChange);
+ handleTabletChange(mediaQuery);
