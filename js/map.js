@@ -230,7 +230,7 @@ function pickMarker(locationPoint){
             return specialMarker[i];
         }
     }
-    //TODO: Jos joku keksisi paremman idean miten asetetaan merkit, niin ehdottomasti kokeillaan!
+
     const dictionary = {
         "merkki" : attraction,
         "opastus": infoPoint,
