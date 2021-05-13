@@ -18,12 +18,12 @@ Luontopolkujen tiedot haetaan citynature.eu REST API:sta ja asetellaan OpenSteer
 - [citynature.eu](https://citynature.eu/fi/kehittajille/)
 
 ### Kuvakaapaukset:
-:
-<img src="img/screenshots/20211305_1231.jpg" width="258" alt="Etusivulla näkyy tietoa mitä sivustolta löytyy ja helsingin sää" title="Etusivu">
-<img src="img/screenshots/20211305_1232.jpg" width="258" alt="Kartta jossa näkyy vallisaaren luontopolut ja siihen kuuluvat kohteet" title="Kartta: Vallisaari">
-<img src="img/screenshots/20211305_1233.jpg" width="258" alt="Kartalla Viikin vanhankaupingin luontopolku" title="Kartta: Vanhakaupunki">
-<img src="img/screenshots/20211305_1234.jpg" width="258" alt="Kartassa käytetty merkkien suodatusta niin että vain vessat näkyvät" title="Merkkien suodatus">
-<img src="img/screenshots/20211305_1235.jpg" width="258" alt="Tietoa sivun näkymä" title="Tietoa sivu">
+
+<img src="img/screenshots/20211305_1231.jpg" width="512" alt="Etusivulla näkyy tietoa mitä sivustolta löytyy ja helsingin sää" title="Etusivu">
+<img src="img/screenshots/20211305_1232.jpg" width="512" alt="Kartta jossa näkyy vallisaaren luontopolut ja siihen kuuluvat kohteet" title="Kartta: Vallisaari">
+<img src="img/screenshots/20211305_1233.jpg" width="512" alt="Kartalla Viikin vanhankaupingin luontopolku" title="Kartta: Vanhakaupunki">
+<img src="img/screenshots/20211305_1234.jpg" width="512" alt="Kartassa käytetty merkkien suodatusta niin että vain vessat näkyvät" title="Merkkien suodatus">
+<img src="img/screenshots/20211305_1235.jpg" width="512" alt="Tietoa sivun näkymä" title="Tietoa sivu">
 
 ## Tekijät:
 - Leevi Koskinen
